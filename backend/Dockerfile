@@ -9,7 +9,7 @@ RUN pip install -r requirements.txt
 RUN chmod +x entrypoint.sh
 
 # Port Number
-EXPOSE 5000
+EXPOSE 5001
 
 ENV FLASK_APP=app.py
 ENTRYPOINT ["./entrypoint.sh"]
