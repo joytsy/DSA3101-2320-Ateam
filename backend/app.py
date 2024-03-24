@@ -19,6 +19,7 @@ atexit.register(cleanup)
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
+# initialize the database
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -35,6 +36,7 @@ def upload_file():
     else:
         return "Invalid file format. Only CSV files are allowed.", 400
 
+# Get all data from MongoDB
 @app.route('/data', methods=['GET'])
 def get_data():
     records = collection.find({})
@@ -43,6 +45,7 @@ def get_data():
         record['_id'] = str(record['_id'])
     return jsonify(data_list)
 
+# Test if api is working 
 @app.route('/test', methods=['GET'])
 def test():
     return "Good", 200
