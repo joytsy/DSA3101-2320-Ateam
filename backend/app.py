@@ -61,7 +61,7 @@ def delete_database():
     return "Database successfully deleted", 200
 
 # Deleting record (check if it works)
-@app.route('/delete-row', methods=['POST'])
+@app.route('/delete-row', methods=['DELETE'])
 def delete_row():
     if not request.json or 'id' not in request.json:
         return jsonify({'error': 'Missing id in request'}), 400
