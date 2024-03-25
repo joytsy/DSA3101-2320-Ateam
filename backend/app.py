@@ -19,6 +19,7 @@ atexit.register(cleanup)
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
+
 # initialize the database
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -51,4 +52,4 @@ def test():
     return "Good", 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
