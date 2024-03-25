@@ -8,12 +8,9 @@ RUN pip install -r requirements.txt
 # Loading the data.xlsx file
 RUN chmod +x entrypoint.sh
 
-# Port Number
-EXPOSE 5001
-
 ENV FLASK_APP=app.py
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
-
+    
 
 

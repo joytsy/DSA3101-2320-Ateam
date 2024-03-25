@@ -51,5 +51,13 @@ def get_data():
 def test():
     return "Good", 200
 
+@app.route('/delete-db', methods=['POST'])
+def delete_database():
+    # Iterate through all collections in the database and drop each
+    collection_names = db.list_collection_names()
+    for collection_name in collection_names:
+        db[collection_name].drop()
+    return "Database successfully deleted", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
