@@ -2,6 +2,7 @@ from flask import Flask, request, send_from_directory, jsonify
 import pandas as pd
 from pymongo import MongoClient
 import atexit
+from bson import ObjectId
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -51,13 +52,33 @@ def get_data():
 def test():
     return "Good", 200
 
-@app.route('/delete-db', methods=['POST'])
+@app.route('/delete-db', methods=['DELETE'])
 def delete_database():
     # Iterate through all collections in the database and drop each
     collection_names = db.list_collection_names()
     for collection_name in collection_names:
         db[collection_name].drop()
     return "Database successfully deleted", 200
+
+# Deleting record (check if it works)
+@app.route('/delete-row', methods=['DELETE'])
+def delete_row():
+    if not request.json or 'id' not in request.json:
+        return jsonify({'error': 'Missing id in request'}), 400
+    # Extract the ID from the request and convert it to ObjectId
+    try:
+        id_to_delete = ObjectId(request.json['id'])
+    except:
+        return jsonify({'error': 'Invalid ID format'}), 400
+    # Perform the deletion
+    result = collection.delete_one({'_id': id_to_delete})
+    # Check if a document was deleted
+    if result.deleted_count > 0:
+        return jsonify({'message': 'Row successfully deleted'}), 200
+    else:
+        return jsonify({'error': 'Row not found'}), 404
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
