@@ -54,7 +54,7 @@ def delete_database():
         db[collection_name].drop()
     return "Database successfully deleted", 200
 
-# Deleting record (check if it works)
+# Deleting record
 @app.route('/delete-client', methods=['DELETE'])
 def delete_row():
     if not request.json or 'id' not in request.json:
