@@ -3,6 +3,9 @@ import pandas as pd
 from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
+from dotenv import load_dotenv
+import os
+from h2ogpte import H2OGPTE
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -10,6 +13,31 @@ app = Flask(__name__, static_folder='frontend')
 client = MongoClient("mongodb://mongo:27017/")
 db = client["AteamBank"]
 collection = db["customer_details"]
+
+# LLM setup (H2O.AI)
+load_dotenv()
+api_key = os.getenv("API_KEY")
+
+llm_client = H2OGPTE(
+    address='https://h2ogpte.genai.h2o.ai',
+    api_key=api_key
+)
+# for gxs products
+gxs_collection_id = os.getenv("GXS_COLLECTION_ID")
+gxs_chat_id = os.getenv("GXS_CHAT_ID")
+
+# for general bank customer retention strategies 
+playbook_collection_id = os.getenv("CRM_PLAYBOOK_COLLECTION_ID")
+playbook_chat_id = os.getenv("CRM_PLAYBOOK_CHAT_ID")
+
+# the chat we use to recommend customer retention based on gxs products (combination of both the other 2 collections)
+recommendation_collection_id = os.getenv("RECOMMENDATION_COLLECTION_ID")
+recommendation_chat_id = os.getenv('RECOMMENDATION_CHAT_ID')
+
+# for prompt engineering
+pre_prompt = 'Imagine you are on the data science team of GXS, taking note that churn being 0 means no churn and churn being 1 means they have or are predicted to churn. If the client has a low balance and has churn = 1, it is likely that they have churned and withdrawn all their accounts, do take note of this when recommending. Take note that if churn is 0, we should recommend how to retain the customer by building brand loyalty for example. This is your clients information: '
+post_prompt = ' What would you recommend to the customer relations team to retain the customer in general, give 2 suggestions based on the products available (huge emphasis on this) and the customer profile. If there are any recommendations, make sure to suggest a GXS programme or product that can be recommended.'
+
 
 @app.route('/')
 def index():
@@ -128,6 +156,31 @@ def read_client(customer_id):
     else:
         return jsonify({'message': 'Client not found'}), 404
 
+# routes for AI recommendation using H2O's LLM
+@app.route('/suggest-client/<customer_id>', methods=['GET'])
+def suggest_product(customer_id):
+    try:
+        customer_id = int(customer_id)
+    except ValueError:
+        return jsonify({'error': 'customer_id must be an integer'}), 400
+    
+    client_data = collection.find_one({"customer_id": customer_id}, {"_id": 0}) 
+
+    if client_data:
+        try:
+            with llm_client.connect(gxs_chat_id) as session:
+                reply = session.query(
+                    pre_prompt + str(client_data) + post_prompt,
+                    timeout=60 
+                )
+        except:
+            return jsonify({'message': 'Session Timeout: Invalid Chat ID'}), 500
+        if reply:
+            return jsonify(reply.content), 200
+        else:
+            return jsonify({'message': 'H2O.AI not found'}), 404
+    else:
+        return jsonify({'message': 'Client not found'}), 404
 
 # for inidividual testing
 if __name__ == '__main__':
