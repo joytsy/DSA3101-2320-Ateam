@@ -2,5 +2,4 @@ backend/__pycache__/app.cpython-39.pyc
 backend/entrypoint.sh
 frontend/churnguard/node_modules
 __pycache__/test.cpython-311.pyc
-
 backend/.env
