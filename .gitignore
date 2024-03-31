@@ -3,3 +3,4 @@ backend/entrypoint.sh
 frontend/churnguard/node_modules
 __pycache__/test.cpython-311.pyc
 
+backend/.env
