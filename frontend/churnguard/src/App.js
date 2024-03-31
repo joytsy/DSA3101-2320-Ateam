@@ -1,23 +1,19 @@
-import logo from './churnguard logo.png';
-import Login from './Login';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import LoginSignUp from './Components/LoginSignUp/LoginSignUp';
+import Home from './Components/Home';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Churnguard!</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <Login />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="/" element={ <LoginSignUp /> } />
+        <Route path="/Home" element={ <Home /> } /> */}
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
