@@ -5,9 +5,9 @@ body {
     padding: 0;
     background-color: #141b2d;
     color: #e0e0e0;
-    font-family: Arial, sans-serif;
+    font-family: sans-serif, sans-serif;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     height: 100vh;
 }

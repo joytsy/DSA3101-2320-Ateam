@@ -10,10 +10,10 @@ const Dashboard = () => {
     const colors = tokens(theme.palette.mode);
   
     return (
-      <Box m="20px">
+      <Box m="10px">
         {/* HEADER */}
         {/* <Box display="flex" justifyContent="space-between" alignItems="center"> */}
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="CHURN ANALYSIS DASHBOARD" subtitle="Overview of churn prediction and churn drivers" />
   
           {/* <Box>
             <Button
@@ -85,10 +85,8 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title="32,441"
-              subtitle="New Clients"
-              progress="0.30"
-              increase="+5%"
+              title="Total number of customers: "
+              subtitle= "input no."
               icon={
                 <PersonAddIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -103,17 +101,15 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            {/* <StatBox
-              title="1,325,134"
-              subtitle="Traffic Received"
-              progress="0.80"
-              increase="+43%"
+            <StatBox
+              title="Customers at risk"
+              subtitle="input no."
               icon={
-                <TrafficIcon
+                <PersonAddIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }
-            /> */}
+            />
           </Box>
   
           {/* ROW 2 */}
@@ -123,7 +119,7 @@ const Dashboard = () => {
             backgroundColor={colors.primary[400]}
           >
             <Box
-              mt="25px"
+              mt="10px"
               p="0 30px"
               display="flex "
               justifyContent="space-between"
@@ -131,15 +127,15 @@ const Dashboard = () => {
             >
               <Box>
                 <Typography
-                  variant="h5"
-                  fontWeight="600"
+                  variant="h3"
+                  fontWeight="500"
                   color={colors.grey[100]}
                 >
-                  Revenue Generated
+                  Value of accounts at risk:
                 </Typography>
                 <Typography
                   variant="h3"
-                  fontWeight="bold"
+                  // fontWeight="bold"
                   color={colors.greenAccent[500]}
                 >
                   $59,342.32
@@ -216,7 +212,7 @@ const Dashboard = () => {
             p="30px"
           >
             <Typography variant="h5" fontWeight="600">
-              Campaign
+              Churn by Credit Score:
             </Typography>
             {/* <Box
               display="flex"
@@ -243,9 +239,9 @@ const Dashboard = () => {
             <Typography
               variant="h5"
               fontWeight="600"
-              sx={{ padding: "30px 30px 0 30px" }}
+              sx={{ padding: "10px 10px 10px 10px" }}
             >
-              Sales Quantity
+              Churn by Products
             </Typography>
             {/* <Box height="250px" mt="-20px">
               <BarChart isDashboard={true} />
@@ -255,14 +251,13 @@ const Dashboard = () => {
             gridColumn="span 4"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
-            padding="30px"
           >
             <Typography
               variant="h5"
               fontWeight="600"
-              sx={{ marginBottom: "15px" }}
+              sx={{ padding: "10px 10px 10px 10px" }}
             >
-              Geography Based Traffic
+              Churn reasons
             </Typography>
             {/* <Box height="200px">
               <GeographyChart isDashboard={true} />
