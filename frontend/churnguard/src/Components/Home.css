@@ -1,8 +1,10 @@
+
+
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
-    color: purple;
+    background-color: #141b2d;
+    color: #e0e0e0;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;

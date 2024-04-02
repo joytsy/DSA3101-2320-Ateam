@@ -12,8 +12,8 @@ const Dashboard = () => {
     return (
       <Box m="20px">
         {/* HEADER */}
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        {/* <Box display="flex" justifyContent="space-between" alignItems="center"> */}
+        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
   
           {/* <Box>
             <Button
@@ -29,13 +29,13 @@ const Dashboard = () => {
               Download Reports
             </Button>
           </Box> */}
-        </Box>
+        {/* </Box> */}
   
         {/* GRID & CHARTS */}
         <Box
           display="grid"
-          gridTemplateColumns="repeat(12, 1fr)"
-          gridAutoRows="140px"
+          gridTemplateColumns="repeat(3, 1fr)"
+          gridAutoRows="auto"
           gap="20px"
         >
           {/* ROW 1 */}
