@@ -1,9 +1,9 @@
 import { Box, Button, IconButton, Typography, useTheme} from "@mui/material";
 import { tokens } from "../../theme";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "./Header";
 import StatBox from "./StatBox";
+import BarChart from "./BarChart";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -12,73 +12,37 @@ const Dashboard = () => {
     return (
       <Box m="10px">
         {/* HEADER */}
-        {/* <Box display="flex" justifyContent="space-between" alignItems="center"> */}
-        <Header title="CHURN ANALYSIS DASHBOARD" subtitle="Overview of churn prediction and churn drivers" />
-  
-          {/* <Box>
-            <Button
-              sx={{
-                backgroundColor: colors.blueAccent[700],
-                color: colors.grey[100],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-            >
-              <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-              Download Reports
-            </Button>
-          </Box> */}
-        {/* </Box> */}
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="CUSTOMER CHURN ANALYSIS DASHBOARD" subtitle="Overview of customer churn prediction and churn drivers" />
+        </Box>
   
         {/* GRID & CHARTS */}
         <Box
           display="grid"
-          gridTemplateColumns="repeat(3, 1fr)"
-          gridAutoRows="auto"
+          gridTemplateColumns="repeat(12, 1fr)"
+          gridAutoRows="140px"
           gap="20px"
         >
           {/* ROW 1 */}
           <Box
-            gridColumn="span 3"
+            gridColumn="span 4"
             backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            {/* <StatBox
-              title="12,361"
-              subtitle="Emails Sent"
-              progress="0.75"
-              increase="+14%"
-              icon={
-                <EmailIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
+            <StatBox
+              title="Customers at risk:"
+              subtitle="input no."
+              icon={ null
+                // <PersonAddIcon
+                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                // />
               }
-            /> */}
+            />
           </Box>
           <Box
-            gridColumn="span 3"
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            {/* <StatBox
-              title="431,225"
-              subtitle="Sales Obtained"
-              progress="0.50"
-              increase="+21%"
-              icon={
-                <PointOfSaleIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
-              }
-            /> */}
-          </Box>
-          <Box
-            gridColumn="span 3"
+            gridColumn="span 4"
             backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
@@ -87,27 +51,29 @@ const Dashboard = () => {
             <StatBox
               title="Total number of customers: "
               subtitle= "input no."
-              icon={
-                <PersonAddIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
+              icon={ null
+                // <PersonAddIcon
+                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                // />
               }
             />
           </Box>
           <Box
-            gridColumn="span 3"
+            gridColumn="span 4"
             backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
             <StatBox
-              title="Customers at risk"
-              subtitle="input no."
-              icon={
-                <PersonAddIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                />
+              title="Revenue from customers at risk (from GXS savings account):"
+              subtitle="Emails Sent"
+              // progress="0.75"
+              // increase="+14%"
+              icon={ null
+                // <PersonAddIcon
+                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                // />
               }
             />
           </Box>
@@ -120,25 +86,26 @@ const Dashboard = () => {
           >
             <Box
               mt="10px"
-              p="0 30px"
+              // p="0 30px"
               display="flex "
               justifyContent="space-between"
               alignItems="center"
             >
               <Box>
                 <Typography
-                  variant="h3"
-                  fontWeight="500"
-                  color={colors.grey[100]}
+                  variant="h5"
+                  fontWeight="600"
+                  sx={{ padding: "10px 10px 10px 10px" }}
                 >
-                  Value of accounts at risk:
+                  Customer Churn YTD
                 </Typography>
                 <Typography
-                  variant="h3"
+                  variant="h5"
                   // fontWeight="bold"
                   color={colors.greenAccent[500]}
+                  sx={{ padding: "10px 10px 10px 10px" }}
                 >
-                  $59,342.32
+                  graph here
                 </Typography>
               </Box>
               {/* <Box>
@@ -168,7 +135,7 @@ const Dashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Recent Transactions
+                Churn Reasons
               </Typography>
             </Box>
             {/* {mockTransactions.map((transaction, i) => (
@@ -209,10 +176,10 @@ const Dashboard = () => {
             gridColumn="span 4"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
-            p="30px"
+            // p="30px"
           >
-            <Typography variant="h5" fontWeight="600">
-              Churn by Credit Score:
+            <Typography variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
+              Churn by Product
             </Typography>
             {/* <Box
               display="flex"
@@ -241,7 +208,7 @@ const Dashboard = () => {
               fontWeight="600"
               sx={{ padding: "10px 10px 10px 10px" }}
             >
-              Churn by Products
+              Churn by Age
             </Typography>
             {/* <Box height="250px" mt="-20px">
               <BarChart isDashboard={true} />
@@ -257,7 +224,7 @@ const Dashboard = () => {
               fontWeight="600"
               sx={{ padding: "10px 10px 10px 10px" }}
             >
-              Churn reasons
+              Churn rate by credit score
             </Typography>
             {/* <Box height="200px">
               <GeographyChart isDashboard={true} />
