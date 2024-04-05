@@ -1,3 +1,5 @@
 backend/__pycache__/app.cpython-39.pyc
 backend/entrypoint.sh
 frontend/churnguard/node_modules
+backend/.env
+__pycache__/test.cpython-311.pyc
