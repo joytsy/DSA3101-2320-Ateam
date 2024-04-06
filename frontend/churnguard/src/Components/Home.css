@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background: black;
     color: purple;
     font-family: Arial, sans-serif;
     display: flex;
@@ -9,6 +9,7 @@ body {
     align-items: center;
     height: 100vh;
 }
+
 
 .header {
     text-align: center;
