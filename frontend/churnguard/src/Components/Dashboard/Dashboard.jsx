@@ -3,7 +3,7 @@ import { tokens } from "../../theme";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "./Header";
 import StatBox from "./StatBox";
-import BarChart from "./BarChart";
+import BarChart from "./BarChart.js";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -210,9 +210,9 @@ const Dashboard = () => {
             >
               Churn by Age
             </Typography>
-            {/* <Box height="250px" mt="-20px">
+            { <Box height="250px" mt="-20px">
               <BarChart isDashboard={true} />
-            </Box> */}
+            </Box> }
           </Box>
           <Box
             gridColumn="span 4"
