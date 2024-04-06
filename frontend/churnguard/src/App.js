@@ -4,6 +4,7 @@ import './App.css';
 import LoginSignUp from './Components/LoginSignUp/LoginSignUp';
 import Home from './Components/Home';
 import Dashboard from './Components/Dashboard/Dashboard';
+import CustomerTable from './Components/CustomerTable/CustomerTable';
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
       <Routes>
         {/* <Route path="/" element={ <LoginSignUp /> } />
         <Route path="/Home" element={ <Home /> } /> */}
-        <Route path="/" element={<Dashboard />} />
+        {/* <Route path="/" element={<Dashboard />} /> */}
+        <Route path="/table" element={<CustomerTable />} />
       </Routes>
     </BrowserRouter>
   );
