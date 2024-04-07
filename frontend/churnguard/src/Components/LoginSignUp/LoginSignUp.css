@@ -105,3 +105,7 @@ body {
     color: #fff; /* Assuming you want white text on the gradient background */
     font-family: Arial, sans-serif;
 }
+
+.background-wrapper{
+    background: linear-gradient(#f66f87, #5714bb);
+}
