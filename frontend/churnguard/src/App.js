@@ -33,8 +33,8 @@ function App() {
       <Routes>
         {/* <Route path="/" element={ <LoginSignUp /> } />
         <Route path="/Home" element={ <Home /> } /> */}
-        {/* <Route path="/" element={<Dashboard />} /> */}
-        <Route path="/table" element={<CustomerTable />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/customertable" element={<CustomerTable />} />
       </Routes>
     </BrowserRouter>
   );

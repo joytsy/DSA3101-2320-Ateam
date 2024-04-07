@@ -3,19 +3,69 @@ import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../../theme";
 import FetchData from "./FetchData";
 import React, {useState, useEffect} from "react";
+import axios from 'axios';
 
 const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashboard' as prop
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-  //   const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
+    const [transformedData, setTransformedData] = useState([]);
 
-  //   // useEffect to fetch from backend
+    useEffect(() => {
+      axios.get("/data")
+        .then(res => {
+          setData(res.data);
+          const groupedData = groupDataByAge(res.data);
+          setTransformedData(groupedData);
+        })
+        .catch(err => console.log(err));
+    }, []);
+  
+    // Function to group data by age ranges
+    const groupDataByAge = (data) => {
+      const ageGroups = {
+        "0-18": [],
+        "19-25": [],
+        "26-40": [],
+        "41-50": [],
+        "51-60": [],
+        "61-100": []
+      };
+  
+      data.forEach(customer => {
+        const age = customer.age;
+        if (age <= 18) {
+          ageGroups["0-18"].push(customer);
+        } else if (age <= 25) {
+          ageGroups["19-25"].push(customer);
+        } else if (age <= 40) {
+          ageGroups["26-40"].push(customer);
+        } else if (age <= 50) {
+          ageGroups["41-50"].push(customer);
+        } else if (age <= 60) {
+          ageGroups["51-60"].push(customer);
+        } else {
+          ageGroups["61-100"].push(customer);
+        }
+      });
+  
+      // Convert age groups into desired format
+      const transformedData = Object.entries(ageGroups).map(([ageRange, customers]) => ({
+        age: ageRange,
+        churn: customers.reduce((total, customer) => total + (customer.churn === 1 ? 1 : 0), 0)
+      }));
+  
+      return transformedData;
+    };
+
   //   useEffect(() => {
-  //     fetch("/data")  // api call
-  //     .then(res => res.json())   // put response into json
-  //     .then(data => setData(data))
-  //     .catch(err => console.log(err)) // check if backend data fetched successfully
-  // }, [])
+  //     axios.get("/data")
+  //         .then(res => {
+  //             setData(res.data);
+  //             setFilteredData(res.data.slice(0, 10)); // Slice to get first 10 rows
+  //         })
+  //         .catch(err => console.log(err));
+  // }, []);
 
   //   const transformedData = data.map(customer => ({
   //     age: customer.age,
@@ -24,85 +74,7 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
 
     return (
     <ResponsiveBar
-      data={[
-        {
-          country: "AD",
-          "hot dog": 137,
-          "hot dogColor": "hsl(229, 70%, 50%)",
-          burger: 96,
-          burgerColor: "hsl(296, 70%, 50%)",
-          kebab: 72,
-          kebabColor: "hsl(97, 70%, 50%)",
-          donut: 140,
-          donutColor: "hsl(340, 70%, 50%)",
-        },
-        {
-          country: "AE",
-          "hot dog": 55,
-          "hot dogColor": "hsl(307, 70%, 50%)",
-          burger: 28,
-          burgerColor: "hsl(111, 70%, 50%)",
-          kebab: 58,
-          kebabColor: "hsl(273, 70%, 50%)",
-          donut: 29,
-          donutColor: "hsl(275, 70%, 50%)",
-        },
-        {
-          country: "AF",
-          "hot dog": 109,
-          "hot dogColor": "hsl(72, 70%, 50%)",
-          burger: 23,
-          burgerColor: "hsl(96, 70%, 50%)",
-          kebab: 34,
-          kebabColor: "hsl(106, 70%, 50%)",
-          donut: 152,
-          donutColor: "hsl(256, 70%, 50%)",
-        },
-        {
-          country: "AG",
-          "hot dog": 133,
-          "hot dogColor": "hsl(257, 70%, 50%)",
-          burger: 52,
-          burgerColor: "hsl(326, 70%, 50%)",
-          kebab: 43,
-          kebabColor: "hsl(110, 70%, 50%)",
-          donut: 83,
-          donutColor: "hsl(9, 70%, 50%)",
-        },
-        {
-          country: "AI",
-          "hot dog": 81,
-          "hot dogColor": "hsl(190, 70%, 50%)",
-          burger: 80,
-          burgerColor: "hsl(325, 70%, 50%)",
-          kebab: 112,
-          kebabColor: "hsl(54, 70%, 50%)",
-          donut: 35,
-          donutColor: "hsl(285, 70%, 50%)",
-        },
-        {
-          country: "AL",
-          "hot dog": 66,
-          "hot dogColor": "hsl(208, 70%, 50%)",
-          burger: 111,
-          burgerColor: "hsl(334, 70%, 50%)",
-          kebab: 167,
-          kebabColor: "hsl(182, 70%, 50%)",
-          donut: 18,
-          donutColor: "hsl(76, 70%, 50%)",
-        },
-        {
-          country: "AM",
-          "hot dog": 80,
-          "hot dogColor": "hsl(87, 70%, 50%)",
-          burger: 47,
-          burgerColor: "hsl(141, 70%, 50%)",
-          kebab: 158,
-          kebabColor: "hsl(224, 70%, 50%)",
-          donut: 49,
-          donutColor: "hsl(274, 70%, 50%)",
-        },
-      ]}
+      data={transformedData}
       theme={{
         // added
         axis: {
@@ -132,10 +104,10 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
           },
         },
       }}
-      // keys={"age"}
-      // indexBy={"churn"}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
+      keys={["churn"]}
+      indexBy="age"
+      // keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+      // indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}

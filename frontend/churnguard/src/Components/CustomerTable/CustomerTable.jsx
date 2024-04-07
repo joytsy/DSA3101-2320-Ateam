@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './CustomerTable.css'; // Import CSS file
+import './CustomerTable.css';
 import { IconButton, Menu, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterList as FilterListIcon } from '@mui/icons-material';
 
