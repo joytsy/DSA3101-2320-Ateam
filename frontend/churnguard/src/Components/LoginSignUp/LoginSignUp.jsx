@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginSignUp.css';
 import Axios from 'axios';
 
@@ -13,6 +13,8 @@ const LoginSignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [canLogin, setCanLogin] = useState(false);
+
     // Function to check if all input fields are filled
     const isFormFilled = () => {
         if (action === "Login") {
@@ -25,7 +27,7 @@ const LoginSignUp = () => {
     // Function to handle toggling between sign up and login
     const toggleAction = () => {
         if (action === "Login") {
-            if (isFormFilled()) {
+            if (isFormFilled() && canLogin) {
                 redirectToHome();
             } else {
                 setAction("Sign Up");
@@ -42,11 +44,12 @@ const LoginSignUp = () => {
 
     const register = () => {
         Axios.post("http://localhost:3001/register", {
-            name: setName,
-            email: setEmail,
-            password: setPassword,
+            name: name,
+            email: email,
+            password: password,
         }).then((response) => {
             console.log(response);
+            //console.log("register");
         });
     } 
 
@@ -56,8 +59,18 @@ const LoginSignUp = () => {
             password: password,
         }).then((response) => {
             console.log(response);
+            //console.log(response.data.message);
+            if (response.data.message !== "Wrong email/password combination!") {
+                setCanLogin(true);
+            };
         });
     }   
+
+    useEffect(() => {
+        if (canLogin === true) {
+            redirectToHome(); // Call redirectToHome if action changes from false to true
+        }
+    }, [canLogin]); // useEffect will trigger whenever 'canLogin' state changes
 
     return (
         <div className='container'>
@@ -87,7 +100,7 @@ const LoginSignUp = () => {
             <div className="submit-container">
                 <div
                     className={action === "Login" ? "submit gray" : "submit"}
-                    onClick={(e)=>{register(e);toggleAction(e);}}
+                    onClick={(e)=>{register(e); toggleAction(e);}}
                     disabled={!isFormFilled()}
                     style={{ opacity: isFormFilled() ? 1 : 0.5 }}
                 >
@@ -95,7 +108,8 @@ const LoginSignUp = () => {
                 </div>
                 <div
                     className={action === "Sign Up" ? "submit gray" : "submit"}
-                    onClick={(e)=>{login(e); toggleAction(e);}}
+                    onClick={(e)=>{login(e); toggleAction(e); }}
+                    
                 >
                     Login
                 </div>

@@ -33,17 +33,18 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
-    
+
     db.query(
         "SELECT * FROM users WHERE email = ? AND password = ?",
         [email, password],
         (err, result) =>{
-
+            console.log(result)
             if (err) {
                 res.send({ err: err});
             }    
-            if (result) {
+            if (result.length > 0) {
                 res.send(result);
+                
             } else {
                 res.send({message: "Wrong email/password combination!"});
             }         
