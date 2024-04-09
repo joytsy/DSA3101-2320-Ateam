@@ -42,6 +42,7 @@ const LoginSignUp = () => {
         window.location.href = '/home';
     }
 
+    // Function to send name, password and email into a database.
     const register = () => {
         Axios.post("http://localhost:3001/register", {
             name: name,
@@ -49,10 +50,10 @@ const LoginSignUp = () => {
             password: password,
         }).then((response) => {
             console.log(response);
-            //console.log("register");
         });
     } 
 
+    // Function to check if email and password combination is present in database.
     const login = () => {
         Axios.post("http://localhost:3001/login", {
             email: email,
