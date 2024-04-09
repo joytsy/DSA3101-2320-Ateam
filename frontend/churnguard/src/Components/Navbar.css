@@ -17,7 +17,8 @@ li{
 
 a{
     text-decoration: none;
-    color: white;
+    color: purple;
+    font-size: large;
 }
 
 .nav{
@@ -38,6 +39,13 @@ a{
     justify-content: space-around;
     gap: 3rem;
 }
+.nav__toggler div {
+    width: 2.5rem;
+    height: 0.2rem;
+    margin: 0.4rem;
+    background: purple;
+    transition: 0.4s ease-in;
+}
 
 .nav__toggler {
     cursor: pointer;
@@ -47,19 +55,31 @@ a{
 @media screen and (max-width: 768px) {
     .nav__toggler {
         display: block;
+        cursor: pointer;
     }
     .nav__menu {
         position: fixed;
         top: 7vh;
         right: 0;
-        width: 50%;
+        width: 50vw;
         height: 93vh;
         background: black;
         flex-direction: column;
-        transform: translateX(100%)
+        transform: translateX(100%);
+        transition: 0.5s ease-in;
     }
 }
 
 .nav__active {
-    transform: translateX(0)
+    transform: translateX(0%)
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-4px, 5px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-4px, -5px);
 }
