@@ -3,7 +3,10 @@ import { tokens } from "../../theme";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "./Header";
 import StatBox from "./StatBox";
-import BarChart from "./BarChart.js";
+import AgeBarChart from "./AgeBarChart.js";
+import ProductBarChart from "./ProductBarChart.js";
+import TenureBarChart from "./TenureBarChart.js";
+import TotalCustomers from "./TotalCustomer.js";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -80,7 +83,7 @@ const Dashboard = () => {
   
           {/* ROW 2 */}
           <Box
-            gridColumn="span 8"
+            gridColumn="span 7"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
           >
@@ -121,7 +124,7 @@ const Dashboard = () => {
             </Box> */}
           </Box>
           <Box
-            gridColumn="span 4"
+            gridColumn="span 5"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
             overflow="auto"
@@ -181,6 +184,9 @@ const Dashboard = () => {
             <Typography variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
               Churn by Product
             </Typography>
+            { <Box height="250px" mt="-20px">
+              <ProductBarChart isDashboard={true} />
+            </Box> }
             {/* <Box
               display="flex"
               flexDirection="column"
@@ -211,7 +217,7 @@ const Dashboard = () => {
               Churn by Age
             </Typography>
             { <Box height="250px" mt="-20px">
-              <BarChart isDashboard={true} />
+              <AgeBarChart isDashboard={true} />
             </Box> }
           </Box>
           <Box
@@ -224,8 +230,11 @@ const Dashboard = () => {
               fontWeight="600"
               sx={{ padding: "10px 10px 10px 10px" }}
             >
-              Churn rate by credit score
+              Churn rate by Tenure
             </Typography>
+            { <Box height="250px" mt="-20px">
+              <TenureBarChart isDashboard={true} />
+            </Box> }
             {/* <Box height="200px">
               <GeographyChart isDashboard={true} />
             </Box> */}

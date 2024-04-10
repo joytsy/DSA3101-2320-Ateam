@@ -1,11 +1,10 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../../theme";
-import FetchData from "./FetchData";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
-const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashboard' as prop
+const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as prop
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
@@ -13,50 +12,11 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
 
     useEffect(() => {
       axios.get("/data")
-        .then(res => {
-          setData(res.data);
-          const groupedData = groupDataByAge(res.data);
-          setTransformedData(groupedData);
-        })
+        .then(res => res.json())
+        .then(data => setData(data))
         .catch(err => console.log(err));
-    }, []);
-  
-    // Function to group data by age ranges
-    const groupDataByAge = (data) => {
-      const ageGroups = {
-        "0-18": [],
-        "19-25": [],
-        "26-40": [],
-        "41-50": [],
-        "51-60": [],
-        "61-100": []
-      };
-  
-      data.forEach(customer => {
-        const age = customer.age;
-        if (age <= 18) {
-          ageGroups["0-18"].push(customer);
-        } else if (age <= 25) {
-          ageGroups["19-25"].push(customer);
-        } else if (age <= 40) {
-          ageGroups["26-40"].push(customer);
-        } else if (age <= 50) {
-          ageGroups["41-50"].push(customer);
-        } else if (age <= 60) {
-          ageGroups["51-60"].push(customer);
-        } else {
-          ageGroups["61-100"].push(customer);
-        }
-      });
-  
-      // Convert age groups into desired format
-      const transformedData = Object.entries(ageGroups).map(([ageRange, customers]) => ({
-        age: ageRange,
-        churn: customers.reduce((total, customer) => total + (customer.churn === 1 ? 1 : 0), 0)
-      }));
-  
-      return transformedData;
-    };
+         }, []);
+
 
   //   useEffect(() => {
   //     axios.get("/data")
@@ -74,7 +34,7 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
 
     return (
     <ResponsiveBar
-      data={transformedData}
+      data={data}
       theme={{
         // added
         axis: {
@@ -104,8 +64,8 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
           },
         },
       }}
-      keys={["churn"]}
-      indexBy="age"
+      keys={["Churn"]}
+      indexBy="Tenure"
       // keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
       // indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
@@ -113,40 +73,40 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: "nivo" }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
+      // defs={[
+      //   {
+      //     id: "dots",
+      //     type: "patternDots",
+      //     background: "inherit",
+      //     color: "#38bcb2",
+      //     size: 4,
+      //     padding: 1,
+      //     stagger: true,
+      //   },
+      //   {
+      //     id: "lines",
+      //     type: "patternLines",
+      //     background: "inherit",
+      //     color: "#eed312",
+      //     rotation: -45,
+      //     lineWidth: 6,
+      //     spacing: 10,
+      //   },
+      // ]}
       borderColor={{
         from: "color",
         modifiers: [["darker", "1.6"]],
       }}
-      axisTop={null}
-      axisRight={null}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: isDashboard ? undefined : "churn", // changed
-        legendPosition: "middle",
-        legendOffset: 32,
-      }}
+      // axisTop={null}
+      // axisRight={null}
+      // axisBottom={{
+      //   tickSize: 5,
+      //   tickPadding: 5,
+      //   tickRotation: 0,
+      //   legend: "Tenure", // changed
+      //   legendPosition: "middle",
+      //   legendOffset: 32,
+      // }}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
@@ -194,4 +154,4 @@ const BarChart =  ({ isDashboard = false}) => {   // accept 'data' and 'isDashbo
   );
 };
 
-export default BarChart;
+export default TenureBarChart;
