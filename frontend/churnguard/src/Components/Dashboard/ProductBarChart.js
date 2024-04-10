@@ -12,14 +12,50 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
 
     useEffect(() => {
       axios.get("/data")
-        .then(res => res.json())
-        .then(data => setData(data))
+        .then(res => {
+          setData(res.data);
+          const groupedData = groupDataByProducts(res.data);
+          setTransformedData(groupedData);
+        })
         .catch(err => console.log(err));
-         }, []);
+    }, []);
+  
+    // Function to group data by products
+    const groupDataByProducts = (data) => {
+      const productGroups = {
+        "FlexiLoan": [],
+        "DebitCard": [],
+        "SavingsAcc": []
+      };
+  
+      data.forEach(customer => {
+        // Assuming 'Churn' is the field indicating churn status
+        if (customer.Churn === 1) {
+          // Check each product and push customer if they have the product
+          if (customer.FlexiLoan === 1) {
+            productGroups["FlexiLoan"].push(customer);
+          }
+          if (customer.DebitCard === 1) {
+            productGroups["DebitCard"].push(customer);
+          }
+          if (customer.SavingsAccount === 1) {
+            productGroups["SavingsAcc"].push(customer);
+          }
+        }
+      });
+  
+      // Convert product groups into desired format
+      const transformedData = Object.entries(productGroups).map(([product, customers]) => ({
+        product: product,
+        churn: customers.length
+      }));
+  
+      return transformedData;
+    };
 
     return (
     <ResponsiveBar
-      data={data}
+      data={transformedData}
       theme={{
         // added
         axis: {
@@ -49,10 +85,8 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
           },
         },
       }}
-      keys={["Churn"]}
-      indexBy="ProductsNumber"
-      // keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      // indexBy="country"
+      keys={["churn"]}
+      indexBy="product"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -88,9 +122,9 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Products", // changed
+        legend: "GXS Products", // changed
         legendPosition: "middle",
-        legendOffset: 32,
+        legendOffset: 40,
       }}
       axisLeft={{
         tickSize: 5,

@@ -12,29 +12,55 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
 
     useEffect(() => {
       axios.get("/data")
-        .then(res => res.json())
-        .then(data => setData(data))
+        .then(res => {
+          setData(res.data);
+          const groupedData = groupDataByTenure(res.data);
+          setTransformedData(groupedData);
+        })
         .catch(err => console.log(err));
-         }, []);
-
-
-  //   useEffect(() => {
-  //     axios.get("/data")
-  //         .then(res => {
-  //             setData(res.data);
-  //             setFilteredData(res.data.slice(0, 10)); // Slice to get first 10 rows
-  //         })
-  //         .catch(err => console.log(err));
-  // }, []);
-
-  //   const transformedData = data.map(customer => ({
-  //     age: customer.age,
-  //     churn: customer.churn === 1 ? 'Churned' : 'Not Churned' // Assuming churn is represented as 1 for churned and 0 for not churned
-  //   }));
+    }, []);
+    
+    // Function to group data by tenure ranges
+    const groupDataByTenure = (data) => {
+      const tenureGroups = {
+        "0": [],
+        "0.5": [],
+        "1": [],
+        "2": [],
+        "3": [],
+        "3.5": [],
+        "4": []
+      };
+    
+      data.forEach(customer => {
+        const tenure = customer.Tenure;
+        if (tenure <= 0.5) {
+          tenureGroups["0.5"].push(customer);
+        } else if (tenure <= 1) {
+          tenureGroups["1"].push(customer);
+        } else if (tenure <= 2) {
+          tenureGroups["2"].push(customer);
+        } else if (tenure <= 3) {
+          tenureGroups["3"].push(customer);
+        } else if (tenure <= 3.5) {
+          tenureGroups["3.5"].push(customer);
+        } else {
+          tenureGroups["4"].push(customer);
+        }
+      });
+    
+      // Convert tenure groups into desired format
+      const transformedData = Object.entries(tenureGroups).map(([tenureRange, customers]) => ({
+        tenure: tenureRange,
+        churn: customers.reduce((total, customer) => total + (customer.Churn === 1 ? 1 : 0), 0)
+      }));
+    
+      return transformedData;
+    };
 
     return (
     <ResponsiveBar
-      data={data}
+      data={transformedData}
       theme={{
         // added
         axis: {
@@ -64,10 +90,8 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
           },
         },
       }}
-      keys={["Churn"]}
-      indexBy="Tenure"
-      // keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      // indexBy="country"
+      keys={["churn"]}
+      indexBy="tenure"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -97,16 +121,16 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
         from: "color",
         modifiers: [["darker", "1.6"]],
       }}
-      // axisTop={null}
-      // axisRight={null}
-      // axisBottom={{
-      //   tickSize: 5,
-      //   tickPadding: 5,
-      //   tickRotation: 0,
-      //   legend: "Tenure", // changed
-      //   legendPosition: "middle",
-      //   legendOffset: 32,
-      // }}
+      axisTop={null}
+      axisRight={null}
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "Years of Tenure", // changed
+        legendPosition: "middle",
+        legendOffset: 40,
+      }}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
