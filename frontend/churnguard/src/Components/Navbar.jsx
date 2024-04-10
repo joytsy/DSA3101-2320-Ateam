@@ -18,12 +18,15 @@ function Navbar() {
     const redirectToHome = () => {
       window.location.href = '/home';
     };
+    // Function to redirect to dashboard page
     const redirectToDashboard = () => {
       window.location.href = '/Dashboard';
     }; 
+    // Function to redirect to chatbot page
     const redirectToChatbot = () => {
       window.location.href = '/Chatbot';
     };
+    // Function to redirect to login page
     const redirectToLogin = () => {
       window.location.href = '/';
     };
