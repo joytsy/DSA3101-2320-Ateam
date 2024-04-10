@@ -1,21 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
-
 body {
     margin: 0;
     padding: 0;
-    background-color: #141b2d;
-    color: #e0e0e0;
-    font-family: "Source Sans Pro", sans-serif;
+    background: black;
+    color: purple;
+    font-family: Arial, sans-serif;
     display: flex;
-    position: relative;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
 }
+
 
 .header {
     text-align: center;
     font-size: 36px;
 }
-

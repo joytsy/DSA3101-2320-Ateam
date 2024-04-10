@@ -1,5 +1,6 @@
 import { Box, Button, IconButton, Typography, useTheme} from "@mui/material";
 import { tokens } from "../../theme";
+import './Dashboard.css';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "./Header";
 import StatBox from "./StatBox";
