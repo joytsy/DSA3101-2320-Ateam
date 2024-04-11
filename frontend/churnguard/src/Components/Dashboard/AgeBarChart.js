@@ -32,7 +32,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       };
   
       data.forEach(customer => {
-        const age = customer.age;
+        const age = customer.Age;
         if (age <= 18) {
           ageGroups["0-18"].push(customer);
         } else if (age <= 25) {
@@ -51,7 +51,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       // Convert age groups into desired format
       const transformedData = Object.entries(ageGroups).map(([ageRange, customers]) => ({
         age: ageRange,
-        churn: customers.reduce((total, customer) => total + (customer.churn === 1 ? 1 : 0), 0)
+        churn: customers.reduce((total, customer) => total + (customer.Churn === 1 ? 1 : 0), 0)
       }));
   
       return transformedData;
@@ -103,10 +103,8 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
           },
         },
       }}
-      keys={["Churn"]}
+      keys={["churn"]}
       indexBy="age"
-      // keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      // indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -119,28 +117,25 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       axisTop={null}
       axisRight={null}
       axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Age", // changed
-        legendPosition: "middle",
-        legendOffset: 32,
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: "Age Groups", // changed
+      legendPosition: "middle",
+      legendOffset: 40,
       }}
-      // axisLeft={{
-      //   tickSize: 5,
-      //   tickPadding: 5,
-      //   tickRotation: 0,
-      //   legend: isDashboard ? undefined : "customer age", // changed
-      //   legendPosition: "middle",
-      //   legendOffset: -40,
-      // }}
-      // enableLabel={false}
-      // labelSkipWidth={12}
-      // labelSkipHeight={12}
-      // labelTextColor={{
-      //   from: "color",
-      //   modifiers: [["darker", 1.6]],
-      // }}
+      axisLeft={{
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: isDashboard ? undefined : "Customer Churn", // changed
+      legendPosition: "middle",
+      legendOffset: -40,
+      }}
+      enableLabel={false}
+      labelSkipWidth={12}
+      labelSkipHeight={12}
+      labelTextColor={{from: "color", modifiers: [["darker", 1.6]],}}
       legends={[
         {
           dataFrom: "keys",

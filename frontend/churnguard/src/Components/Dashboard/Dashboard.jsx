@@ -54,7 +54,9 @@ const Dashboard = () => {
           >
             <StatBox
               title="Total number of customers: "
-              subtitle= "input no."
+              subtitle={
+                <TotalCustomers />
+              }
               icon={ null
                 // <PersonAddIcon
                 //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
