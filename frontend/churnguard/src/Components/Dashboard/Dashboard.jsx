@@ -8,6 +8,8 @@ import AgeBarChart from "./AgeBarChart.js";
 import ProductBarChart from "./ProductBarChart.js";
 import TenureBarChart from "./TenureBarChart.js";
 import TotalCustomers from "./TotalCustomer.js";
+import ChurnYTDLineChart from "./ChurnYTDLineChart.js";
+import ReasonsDoughnutChart from "./ReasonsDoughnutChart.js";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -72,8 +74,8 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title="Revenue from customers at risk (from GXS savings account):"
-              subtitle="Emails Sent"
+              title="Revenue at risk (from GXS savings account):"
+              subtitle="$Amount"
               // progress="0.75"
               // increase="+14%"
               icon={ null
@@ -90,29 +92,18 @@ const Dashboard = () => {
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
           >
-            <Box
-              mt="10px"
-              // p="0 30px"
-              display="flex "
-              justifyContent="space-between"
-              alignItems="center"
-            >
               <Box>
-                <Typography
-                  variant="h5"
-                  fontWeight="600"
-                  sx={{ padding: "10px 10px 10px 10px" }}
-                >
-                  Customer Churn YTD
+                <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
+                  Customer Churn per Month
                 </Typography>
-                <Typography
+                {/* <Typography
                   variant="h5"
                   // fontWeight="bold"
                   color={colors.greenAccent[500]}
                   sx={{ padding: "10px 10px 10px 10px" }}
                 >
                   graph here
-                </Typography>
+                </Typography> */}
               </Box>
               {/* <Box>
                 <IconButton>
@@ -121,29 +112,32 @@ const Dashboard = () => {
                   />
                 </IconButton>
               </Box> */}
+            
+            <Box height="250px" m="-20px 0 0 0">
+              <ChurnYTDLineChart isDashboard={true} />
             </Box>
-            {/* <Box height="250px" m="-20px 0 0 0">
-              <LineChart isDashboard={true} />
-            </Box> */}
           </Box>
           <Box
             gridColumn="span 5"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
-            overflow="auto"
+            // overflow="auto"
           >
-            <Box
+            {/* <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
               colors={colors.grey[100]}
               p="15px"
-            >
-              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+            > */}
+              <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
                 Churn Reasons
               </Typography>
-            </Box>
+            {/* </Box> */}
+            { <Box height="250px" mt="-20px" sx={{ padding: "5px 5px 5px 5px" }}>
+              <ReasonsDoughnutChart isDashboard={true} />                         
+            </Box> }
             {/* {mockTransactions.map((transaction, i) => (
               <Box
                 key={`${transaction.txId}-${i}`}
