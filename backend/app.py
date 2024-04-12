@@ -65,7 +65,7 @@ def delete_row():
     except:
         return jsonify({'error': 'Invalid ID format'}), 400
     # Perform the deletion
-    result = collection.delete_one({'customer_id': id_to_delete})
+    result = collection.delete_one({'CustomerID': id_to_delete})
     # Check if a document was deleted
     if result.deleted_count > 0:
         return jsonify({'message': 'Row successfully deleted'}), 200
@@ -78,10 +78,10 @@ def add_client():
         client_data = request.json
 
         # Check if the customer_id already exists in the database
-        if 'customer_id' in client_data:
-            existing_client = collection.find_one({"customer_id": client_data['customer_id']})
+        if 'CustomerID' in client_data:
+            existing_client = collection.find_one({"CustomerID": client_data['CustomerID']})
             if existing_client:
-                return jsonify({'error': 'A client with the given customer_id already exists'}), 400
+                return jsonify({'error': 'A client with the given CustomerID already exists'}), 400
 
         # If _id is specified for some reason, ensure it's an ObjectId
         if client_data.get('_id'):
@@ -98,11 +98,11 @@ def update_client(customer_id):
         update_data = request.json
         # Ensure _id and customer_id retains the original values
         update_data.pop('_id', None) 
-        update_data.pop('customer_id', None)
+        update_data.pop('CustomerID', None)
 
         # Find one client matching the customer_id and update it
         result = collection.find_one_and_update(
-            {"customer_id": int(customer_id)}, 
+            {"CustomerID": int(customer_id)}, 
             {"$set": update_data},
             return_document=ReturnDocument.AFTER
         )
@@ -118,10 +118,10 @@ def read_client(customer_id):
     try:
         customer_id = int(customer_id)
     except ValueError:
-        return jsonify({'error': 'customer_id must be an integer'}), 400
+        return jsonify({'error': 'CustomerID must be an integer'}), 400
 
     # Find the client by customer_id
-    client_data = collection.find_one({"customer_id": customer_id}, {"_id": 0}) 
+    client_data = collection.find_one({"CustomerID": customer_id}, {"_id": 0}) 
 
     if client_data:
         return jsonify(client_data), 200

@@ -30,6 +30,23 @@ export const getData = async () => {
   }
 };
 
+// Function to get client data from MongoDB
+export const getClientData = async (customerID) => {
+  try {
+    const response = await fetch(`/read-client/${customerID}`, {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    throw error; 
+  }
+};
+
 // Function to delete all data from Mongo
 export const deleteDatabase = async () => {
   try {
