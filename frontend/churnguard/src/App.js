@@ -4,7 +4,7 @@ import './App.css';
 import LoginSignUp from './Components/LoginSignUp/LoginSignUp';
 import Home from './Components/Home';
 import Dashboard from './Components/Dashboard';
-import ClientData from './Components/ClientData';
+import CustomerData from './Components/CustomerData';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={ <LoginSignUp /> } />
         <Route path="/Home" element={ <Home /> } />
         <Route path="/Dashboard" element={ <Dashboard /> } /> 
-        <Route path="/ClientData" element={ <ClientData /> } />
+        <Route path="/CustomerData" element={ <CustomerData /> } />
       </Routes>
     </BrowserRouter>
   );

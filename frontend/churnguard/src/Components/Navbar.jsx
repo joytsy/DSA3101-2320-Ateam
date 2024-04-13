@@ -23,8 +23,8 @@ function Navbar() {
       window.location.href = '/Dashboard';
     }; 
     // Function to redirect to chatbot page
-    const redirectToClientData = () => {
-      window.location.href = '/ClientData';
+    const redirectToCustomerData = () => {
+      window.location.href = '/CustomerData';
       console.log("dashbaord")
     };
     // Function to redirect to login page
@@ -37,7 +37,7 @@ function Navbar() {
         <ul className={active}>
           <li className="nav__item"><a className="nav__link" onClick={redirectToHome}>Home</a></li>
           <li className="nav__item"><a className="nav__link" onClick={redirectToDashboard}>Dashboard</a></li>
-          <li className="nav__item"><a className="nav__link" onClick={redirectToClientData}>Client Data</a></li>
+          <li className="nav__item"><a className="nav__link" onClick={redirectToCustomerData}>Customer Data</a></li>
           <li className="nav__item"><a className="nav__link" onClick={redirectToLogin}>Logout</a></li>
         </ul>
         <div onClick = {navToggle} className={toggleIcon}>

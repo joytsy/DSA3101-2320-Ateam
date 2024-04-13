@@ -17,8 +17,9 @@ li{
 
 a{
     text-decoration: none;
-    color: purple;
+    color: #8653e3;
     font-size: large;
+    font-family: Inter, sans-serif;
 }
 
 .nav{
@@ -26,7 +27,7 @@ a{
     align-items: center;
     justify-content: space-around;
     height: 8vh;
-    background: black;
+    background: #0c0120;
 }
 
 .nav__brand{
@@ -43,7 +44,7 @@ a{
     width: 2.5rem;
     height: 0.2rem;
     margin: 0.4rem;
-    background: purple;
+    background:#8653e3;
     transition: 0.4s ease-in;
 }
 
@@ -63,7 +64,7 @@ a{
         right: 0;
         width: 50vw;
         height: 93vh;
-        background: black;
+        background: #0c0120;
         flex-direction: column;
         transform: translateX(100%);
         transition: 0.5s ease-in;

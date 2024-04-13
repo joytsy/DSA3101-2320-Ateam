@@ -1,9 +1,9 @@
 .home-background {
     margin: 0;
     padding: 0;
-    background-color: black;
-    color: purple;
-    font-family: Arial, sans-serif;
+    background-color: #0c0120;
+    color: #8653e3;
+    font-family: Inter, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,5 +13,5 @@
 
 .header {
     text-align: center;
-    font-size: 36px;
+    font-size: 33px;
 }
