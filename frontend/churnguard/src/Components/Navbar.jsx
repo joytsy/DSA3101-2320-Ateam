@@ -25,6 +25,7 @@ function Navbar() {
     // Function to redirect to chatbot page
     const redirectToClientData = () => {
       window.location.href = '/ClientData';
+      console.log("dashbaord")
     };
     // Function to redirect to login page
     const redirectToLogin = () => {

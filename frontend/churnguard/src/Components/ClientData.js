@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Navbar from './Navbar.jsx';
 
 const ClientData = () => {
   return (
     <div>
-        <h1>Client Data</h1>
+        <Navbar />
+        <h1>ClientData</h1>
     </div>
   )
 }
 
-export default ClientData
+export default ClientData; 
