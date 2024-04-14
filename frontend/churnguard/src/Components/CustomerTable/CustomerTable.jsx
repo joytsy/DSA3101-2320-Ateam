@@ -9,6 +9,7 @@ import { FilterList as FilterListIcon } from '@mui/icons-material';
 
 
 
+
 function CustomerTable() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -17,9 +18,10 @@ function CustomerTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage] = useState(10);
 
+
     const [columnFilterAnchorEl, setColumnFilterAnchorEl] = useState(null);
 
-
+    // lookup tables for data
     const employmentStatusLabel = {
         '1': 'Full-time',
         '0': 'Part-time/Unemployed'
@@ -45,9 +47,57 @@ function CustomerTable() {
         '0': 'No'
       };
 
+
+    // columns array
+    // const columns = [
+    //     {
+    //         Header: 'Customer ID',
+    //         accessor: 'CustomerID',
+    //         filterOptions: [] 
+    //     },
+    //     {
+    //         Header: 'Customer Name',
+    //         accessor: 'Name',
+    //         filterOptions: [] 
+    //     },
+    //     {
+    //         Header: 'Age',
+    //         accessor: 'Age',
+    //         filterOptions: [] 
+    //     },
+    //     {
+    //         Header: 'Email',
+    //         accessor: 'Email',
+    //         filterOptions: []
+    //     },
+    //     {
+    //         Header: 'Employment Status',
+    //         accessor: 'EmploymentStatus',
+    //         filterOptions: ['Full-time', 'Part-time/Unemployed']
+    //     },
+    //     {
+    //         Header: 'Housing Status',
+    //         accessor: 'HousingStatus',
+    //         filterOptions: ['Owned', 'Rented/No property']
+    //     },
+    //     {
+    //         Header: 'Member Status',
+    //         accessor: 'MemberStatus',
+    //         filterOptions: ['Active', 'Inactive']
+    //     },
+    //     {
+    //         Header: 'Country of Residence',
+    //         accessor: 'C',
+    //         filterOptions: ['Male', 'Female']
+    //     },
+    //     {
+    //         Header: 'Gender',
+    //         accessor: 'Gender',
+    //         filterOptions: ['Male', 'Female']
+    //     },
+    // ];
+
     
-
-
 
     // Fetch data
     useEffect(() => {
@@ -138,33 +188,27 @@ function CustomerTable() {
 
     // column filters 
 
-    const [columnFilters, setColumnFilters] = useState({
-        EmploymentStatus: {
-            'Full-time': false,
-            'Part-time/Unemployed': false
-        },
+    // // State for column filters 
+    // const [columnFilters, setColumnFilters] = useState({
+    //     EmploymentStatus: {
+    //         'Full-time': false,
+    //         'Part-time/Unemployed': false
+    //     },
     
-    });
+    // });
 
-    useEffect(() => {
-        const filtered = data.filter(user => {
-            return Object.keys(columnFilters).every(column => {
-                const options = Object.keys(columnFilters[column]).filter(option => columnFilters[column][option]);
-                return options.length === 0 || options.includes(user[column]);
-            });
-        });
-        setFilteredData(filtered);
-    }, [data, columnFilters]);
 
-    const handleOpenColumnFilter = (event) => {
+    // Handle opening column filter menu
+    const handleOpenColumnFilter = (event, columnName) => {
         setColumnFilterAnchorEl(event.currentTarget);
+        setSelectedColumn(columnName);
     };
 
+    // Handle closing column filter menu
     const handleCloseColumnFilter = () => {
         setColumnFilterAnchorEl(null);
     };
-
-    const handleColumnFilterChange = (column,option) => {
+    const handleColumnFilterChange = (column, option) => {
         const updatedFilters = {
             ...columnFilters,
             [column]: {
@@ -175,9 +219,22 @@ function CustomerTable() {
         setColumnFilters(updatedFilters);
     };
 
+    // Apply column filters
     const applyColumnFilters = () => {
         handleCloseColumnFilter();
+        // Apply filters and update filteredData state
     };
+
+
+    // useEffect(() => {
+    //     const filtered = data.filter(user => {
+    //         return Object.keys(columnFilters).every(column => {
+    //             const options = Object.keys(columnFilters[column]).filter(option => columnFilters[column][option]);
+    //             return options.length === 0 || options.includes(user[column]);
+    //         });
+    //     });
+    //     setFilteredData(filtered);
+    // }, [data, columnFilters]);
 
     return (
         <div class="left">
@@ -194,35 +251,15 @@ function CustomerTable() {
             </form>
             <table className='customer-table'>
                     <thead>
-                        <tr>
+                        <tr> 
                             <th>Customer ID</th>
                             <th>Customer Name</th>
                             <th>Age</th>
                             <th>Email</th>
                             <th>
                                 Employment Status
-                                {/* Filter icon button for Employment Status */}
-                                    <IconButton aria-label="filter" onClick={handleOpenColumnFilter} className="white-button">
-                                        <FilterListIcon />
-                                    </IconButton>
-                                    <Menu
-                                        anchorEl={columnFilterAnchorEl}
-                                        open={Boolean(columnFilterAnchorEl)}
-                                        onClose={handleCloseColumnFilter}
-                                    >
-                                        {['Full-time', 'Part-time/Unemployed'].map(option => (
-                                            <MenuItem key={option}>
-                                                <Checkbox
-                                                    checked={columnFilters['EmploymentStatus']?.[option]}
-                                                    onChange={() => handleColumnFilterChange('EmploymentStatus', option)}
-                                                />
-                                                {option}
-                                            </MenuItem>
-                                        ))}
-                                        {/* Add more options as needed */}
-                                        <MenuItem onClick={applyColumnFilters}>Apply</MenuItem>
-                                    </Menu>
-                                </th>
+                            </th>
+
                             <th>Housing Status</th>
                             <th>Member Status</th>
                             <th>Country of Residence</th>
@@ -281,14 +318,6 @@ function CustomerTable() {
                         ))}
                     </tbody>
             </table>
-            {/* Pagination */}
-            {/* <div>
-                {Array.from({ length: Math.ceil(data.length / rowsPerPage) }, (_, index) => index + 1).map(pageNumber => (
-                    <button key={pageNumber} onClick={() => handlePageChange(pageNumber)}>
-                        {pageNumber}
-                    </button>
-                ))}
-            </div> */}
             <div>
                 <span>Page</span>
                 <input
