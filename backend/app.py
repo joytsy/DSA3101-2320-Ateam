@@ -4,6 +4,11 @@ from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
 import bcrypt
+import pickle
+import joblib
+from dotenv import load_dotenv
+import os
+from h2ogpte import H2OGPTE
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -11,6 +16,31 @@ app = Flask(__name__, static_folder='frontend')
 client = MongoClient("mongodb://mongo:27017/")
 db = client["AteamBank"]
 collection = db["customer_details"]
+
+# LLM setup (H2O.AI)
+load_dotenv()
+api_key = os.getenv("API_KEY")
+
+llm_client = H2OGPTE(
+    address='https://h2ogpte.genai.h2o.ai',
+    api_key=api_key
+)
+# for gxs products
+gxs_collection_id = os.getenv("GXS_COLLECTION_ID")
+gxs_chat_id = os.getenv("GXS_CHAT_ID")
+
+# for general bank customer retention strategies 
+playbook_collection_id = os.getenv("CRM_PLAYBOOK_COLLECTION_ID")
+playbook_chat_id = os.getenv("CRM_PLAYBOOK_CHAT_ID")
+
+# the chat we use to recommend customer retention based on gxs products (combination of both the other 2 collections)
+recommendation_collection_id = os.getenv("RECOMMENDATION_COLLECTION_ID")
+recommendation_chat_id = os.getenv('RECOMMENDATION_CHAT_ID')
+
+# for prompt engineering
+pre_prompt = 'Imagine you are on the data science team of GXS, taking note that churn being 0 means no churn and churn being 1 means they have or are predicted to churn. If the client has a low balance and has churn = 1, it is likely that they have churned and withdrawn all their accounts, do take note of this when recommending. Take note that if churn is 0, we should recommend how to retain the customer by building brand loyalty for example. This is your clients information: '
+post_prompt = ' What would you recommend to the customer relations team to retain the customer in general, give 2 suggestions based on the products available (huge emphasis on this) and the customer profile. If there are any recommendations, make sure to suggest a GXS programme or product that can be recommended.'
+
 
 @app.route('/')
 def index():

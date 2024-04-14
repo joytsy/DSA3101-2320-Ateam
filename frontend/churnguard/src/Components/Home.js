@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { testHealth, deleteDatabase, uploadFile } from './services/apiService'; // Ensure the path matches your file structure
+import { testHealth, deleteDatabase, uploadFile } from './services/apiService'; 
 import './Home.css';
 import Navbar from './Navbar.jsx';
 
