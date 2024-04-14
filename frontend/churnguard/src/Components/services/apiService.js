@@ -87,3 +87,20 @@ export const uploadFile = async (file) => {
     throw error; 
   }
 };
+
+// Function to get suggested client data from MongoDB
+export const getSuggestion = async (customerID) => {
+  try {
+    const response = await fetch(`/suggest-client/${customerID}`, {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    throw error; 
+  }
+};
