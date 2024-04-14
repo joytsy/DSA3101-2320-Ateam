@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
-const ChurnYTDLineChart  =  ({ isDashboard = false}) => { 
+const ChurnLineChart  =  ({ isDashboard = false}) => { 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
@@ -80,7 +80,7 @@ const ChurnYTDLineChart  =  ({ isDashboard = false}) => {
                   strokeWidth: 1,
                 },
                 text: {
-                  fill: colors.grey[100],
+                  fill: "colors.grey[100]",
                 },
               },
             },
@@ -95,11 +95,12 @@ const ChurnYTDLineChart  =  ({ isDashboard = false}) => {
               },
             },
             text: {
-                fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace'
+                fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace',
+                fill: "yellow",     // coloue of point label
               },
           }}
           colors={{ scheme: 'nivo' }} 
-          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 120, bottom: 50, left: 70 }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
@@ -109,7 +110,9 @@ const ChurnYTDLineChart  =  ({ isDashboard = false}) => {
             reverse: false,
           }}
           yFormat=" >-.0f"
-          curve="catmullRom"
+          curve="linear"
+          enableArea={true}               // shaded area below graph
+          enablePointLabel={true}         // point labels
           axisTop={null}
           axisRight={null}
           axisBottom={{
@@ -150,7 +153,7 @@ const ChurnYTDLineChart  =  ({ isDashboard = false}) => {
               itemDirection: "left-to-right",
               itemWidth: 80,
               itemHeight: 20,
-              itemOpacity: 0.75,
+              itemOpacity: 1,
               symbolSize: 12,
               symbolShape: "circle",
               symbolBorderColor: "rgba(0, 0, 0, .5)",
@@ -183,4 +186,4 @@ const ChurnYTDLineChart  =  ({ isDashboard = false}) => {
 
 
   
-export default ChurnYTDLineChart;
+export default ChurnLineChart;

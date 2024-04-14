@@ -8,8 +8,10 @@ import AgeBarChart from "./AgeBarChart.js";
 import ProductBarChart from "./ProductBarChart.js";
 import TenureBarChart from "./TenureBarChart.js";
 import TotalCustomers from "./TotalCustomer.js";
-import ChurnYTDLineChart from "./ChurnYTDLineChart.js";
+import ChurnYTDLineChart from "./ChurnLineChart.js";
 import ReasonsDoughnutChart from "./ReasonsDoughnutChart.js";
+import CustomersAtRisk from "./CustomersAtRisk.js";
+import RevenueAtRisk from "./RevenueAtRisk.js";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -39,7 +41,9 @@ const Dashboard = () => {
           >
             <StatBox
               title="Customers at risk:"
-              subtitle="input no."
+              subtitle={
+                <CustomersAtRisk />
+              }
               icon={ null
                 // <PersonAddIcon
                 //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -75,7 +79,9 @@ const Dashboard = () => {
           >
             <StatBox
               title="Revenue at risk (from GXS savings account):"
-              subtitle="$Amount"
+              subtitle={
+                <RevenueAtRisk />
+              }
               // progress="0.75"
               // increase="+14%"
               icon={ null
