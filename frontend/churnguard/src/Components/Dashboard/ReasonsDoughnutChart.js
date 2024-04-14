@@ -131,7 +131,7 @@ const ReasonsDoughnutChart = () => {
             itemTextColor: "white",
             itemDirection: "left-to-right",
             itemOpacity: 1,
-            symbolSize: 18,
+            symbolSize: 15,
             symbolShape: "circle",
             // effects: [
             //   {
