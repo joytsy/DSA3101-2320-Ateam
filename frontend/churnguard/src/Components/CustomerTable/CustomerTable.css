@@ -1,4 +1,11 @@
 /* Apply styles only to the CustomerTable component */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure body and html fill the entire viewport height */
+}
+
 .customer-table-container {
     margin: auto;
     width: 100%;

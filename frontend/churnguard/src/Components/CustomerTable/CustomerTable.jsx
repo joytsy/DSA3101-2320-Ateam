@@ -145,7 +145,7 @@ function CustomerTable() {
                 // Convert user.CustomerID to string before using includes
                 const customerIdString = String(user.CustomerID);
                 // Check if customerIdString contains the searchTerm
-                return customerIdString.includes(searchTerm);
+                return customerIdString.startsWith(searchTerm);
             });
             setFilteredData(filtered.slice(0, rowsPerPage)); // Update filtered data and reset to first page
             setCurrentPage(1); // Reset to first page
