@@ -11,9 +11,6 @@ const StatBox = ({ title, subtitle, icon, increase}) => {
             <Box>
               {icon}
               <Typography
-                // variant="h4"
-                // fontWeight="bold"
-                // sx={{ color: colors.grey[100] }}
                 variant="h5"
                 fontWeight="600"
                 sx={{ padding: "10px 10px 5px 5px" }}
@@ -23,13 +20,13 @@ const StatBox = ({ title, subtitle, icon, increase}) => {
             </Box>
           </Box>
           <Box display="flex" justifyContent="space-between" mt="2px">
-            <Typography variant="h5" sx={{ color: colors.greenAccent[500] , padding: "5px 10px 10px 10px"}}>
+            <Typography variant="h5" sx={{ color: colors.greenAccent[500] , padding: "5px 10px 10px 10px"}} fontFamily={'\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace'}>
               {subtitle}
             </Typography>
             <Typography
               variant="h5"
               fontStyle="italic"
-              sx={{ color: colors.greenAccent[600] }}
+              sx={{ color: colors.greenAccent[600] , padding: "10px 10px 5px 5px"}}
             >
               {increase}
             </Typography>

@@ -159,7 +159,7 @@ def read_client(CustomerID):
     else:
         return jsonify({'message': 'Client not found'}), 404
     
-    
+
 @app.route('/login', methods=['POST'])
 def login_user():
     try:
@@ -184,30 +184,6 @@ def login_user():
     except Exception as e:
         return jsonify({'error': 'Server error'}), 500
 
-@app.route('/suggest-client/<CustomerID>', methods=['GET'])
-def suggest_product(CustomerID):
-    try:
-        CustomerID = int(CustomerID)
-    except ValueError:
-        return jsonify({'error': 'CustomerID must be an integer'}), 400
-    
-    client_data = collection.find_one({"CustomerID": CustomerID}, {"_id": 0}) 
-
-    if client_data:
-        try:
-            with llm_client.connect(gxs_chat_id) as session:
-                reply = session.query(
-                    pre_prompt + str(client_data) + post_prompt,
-                    timeout=60 
-                )
-        except:
-            return jsonify({'message': 'Session Timeout: Invalid Chat ID'}), 500
-        if reply:
-            return jsonify(reply.content), 200
-        else:
-            return jsonify({'message': 'H2O.AI not found'}), 404
-    else:
-        return jsonify({'message': 'Client not found'}), 404
 
 # for inidividual testing
 if __name__ == '__main__':

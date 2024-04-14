@@ -51,25 +51,11 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       // Convert age groups into desired format
       const transformedData = Object.entries(ageGroups).map(([ageRange, customers]) => ({
         age: ageRange,
-        churn: customers.reduce((total, customer) => total + (customer.Churn === 1 ? 1 : 0), 0)
+        Churn: customers.reduce((total, customer) => total + (customer.Churn === 1 ? 1 : 0), 0)
       }));
   
       return transformedData;
     };
-
-  //   useEffect(() => {
-  //     axios.get("/data")
-  //         .then(res => {
-  //             setData(res.data);
-  //             setFilteredData(res.data.slice(0, 10)); // Slice to get first 10 rows
-  //         })
-  //         .catch(err => console.log(err));
-  // }, []);
-
-  //   const transformedData = data.map(customer => ({
-  //     age: customer.age,
-  //     churn: customer.churn === 1 ? 'Churned' : 'Not Churned' // Assuming churn is represented as 1 for churned and 0 for not churned
-  //   }));
 
     return (
     <ResponsiveBar
@@ -102,18 +88,19 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
             fill: colors.grey[100],
           },
         },
+        text: {
+          fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace'
+        },
       }}
-      keys={["churn"]}
+      keys={["Churn"]}
       indexBy="age"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 30, bottom: 50, left: 70 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
-      borderColor={{
-        from: "color",
-        modifiers: [["darker", "1.6"]],
-      }}
+      colors={{ scheme: 'pastel1' }}
+      colorBy="indexValue"                         //bar colours
+      borderColor="black"
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -128,38 +115,51 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: isDashboard ? undefined : "Customer Churn", // changed
+      legend: "Number of Customers", // changed
       legendPosition: "middle",
-      legendOffset: -40,
+      legendOffset: -45,
       }}
-      enableLabel={false}
+      enableLabel={true}                             // bar labels
       labelSkipWidth={12}
-      labelSkipHeight={12}
-      labelTextColor={{from: "color", modifiers: [["darker", 1.6]],}}
-      legends={[
-        {
-          dataFrom: "keys",
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 120,
-          translateY: 0,
-          itemsSpacing: 2,
-          itemWidth: 100,
-          itemHeight: 20,
-          itemDirection: "left-to-right",
-          itemOpacity: 0.85,
-          symbolSize: 20,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemOpacity: 1,
-              },
-            },
-          ],
-        },
-      ]}
+      labelSkipHeight={0}
+      labelTextColor="black"
+      // legends={[                                     // legend
+      //   {
+      //     dataFrom: "indexValue",
+      //     anchor: "right",
+      //     direction: "column",
+      //     justify: false,
+      //     translateX: 120,
+      //     translateY: 0,
+      //     itemsSpacing: 2,
+      //     itemWidth: 100,
+      //     itemHeight: 20,
+      //     itemDirection: "left-to-right",
+      //     itemOpacity: 0.85,
+      //     symbolSize: 20,
+      //     itemTextColor: colors.grey[100],         //"Churn" text
+      //     effects: [
+      //       {
+      //         on: "hover",
+      //         style: {
+      //           itemOpacity: 1,
+      //         },
+      //       },
+      //     ],
+      //   },
+      // ]}
+      tooltip={({ id, value, indexValue }) => (
+        <div
+          style={{
+            color: "#000",         // Hover Font color set to black
+            background: "#fff", 
+            padding: "12px", 
+            borderRadius: "5px", 
+          }}
+        >
+          <strong>{id}</strong>: {value} from Age {indexValue}
+        </div>
+      )}
       role="application"
       barAriaLabel={function (e) {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;

@@ -1,21 +1,20 @@
 /* Apply styles only to the CustomerTable component */
 .customer-table-container {
-    padding: 1rem;
+    margin: auto;
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling if the table exceeds the screen width */
+    /* padding: 1rem; */
     background-color: #141b2d;
 }
 
-.customer-table-container .mt-3 {
-    margin-top: 1rem;
-}
+.customer-table {
+    margin: auto; /*Center the table within its container*/
+    width: 100%; /*Make the table span the full width of its container*/
+    border-collapse: collapse; 
+    border: 1px solid #ffffff; /* Add border to the table */
+    white-space: nowrap; /*Prevent text wrapping*/
+  }
 
-.customer-table-container h3 {
-    color: #ffffff;
-    margin-left: 0.5rem;
-}
-.customer-table-container h4 {
-    color: #ffffff;
-    margin-left: 0.5rem;
-}
 
 .customer-table-container table {
     width: 100%;
@@ -23,20 +22,27 @@
     border-spacing: 0;
 }
 
-.customer-table-container th,
+.customer-table thead th,
 .customer-table-container td {
     padding: 0.5rem;
     text-align: left;
-    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd; /* Add right border to table cells */
     color: #ffffff;
 }
 
 .customer-table-container th {
     background-color: #141b2d;
+    border-bottom: 1px solid #ffffff; /* Add border below the table headers */
+    border-right: 1px solid #ffffff; /* Add right border to table headers */
 }
+
+.customer-table-container tbody tr {
+    border-bottom: 1px solid #dddddd; /* Add border between each row */
+} 
 
 .customer-table-container tbody tr:nth-child(even) {
     background-color: #1e2a3a;
+    border-bottom: none; /* Remove bottom border for last row */
 }
 
 .customer-table-container tbody tr:hover {
@@ -46,3 +52,11 @@
 .customer-table-container .white-button {
     color: white;
 }
+
+.left {
+    /* position: absolute; */
+    /* left: 100px; */
+    width: 1000px;
+    padding: 10px;
+  }
+

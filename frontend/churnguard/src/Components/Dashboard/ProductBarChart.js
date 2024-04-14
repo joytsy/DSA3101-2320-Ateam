@@ -47,7 +47,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
       // Convert product groups into desired format
       const transformedData = Object.entries(productGroups).map(([product, customers]) => ({
         product: product,
-        churn: customers.length
+        Churn: customers.length
       }));
   
       return transformedData;
@@ -84,14 +84,18 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
             fill: colors.grey[100],   //colour of legend "Churn"
           },
         },
+        text: {
+          fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace'
+        },
       }}
-      keys={["churn"]}
+      keys={["Churn"]}
       indexBy="product"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 30, bottom: 50, left: 70 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
+      colors={{ scheme: 'pastel1' }}
+      colorBy="indexValue"
       defs={[
         {
           id: "dots",
@@ -112,10 +116,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
           spacing: 10,
         },
       ]}
-      borderColor={{
-        from: "color",
-        modifiers: [["darker", "1.6"]],
-      }}
+      borderColor="black"
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -130,41 +131,50 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? true : "Number", // changed
+        legend: "Number of Customers", // changed
         legendPosition: "middle",
-        legendOffset: -40,
+        legendOffset: -45,
       }}
-      enableLabel={false}
+      enableLabel={true}                             // bar labels
       labelSkipWidth={12}
-      labelSkipHeight={12}
-      labelTextColor={{
-        from: "color",
-        modifiers: [["darker", 1.6]],
-      }}
-      legends={[
-        {
-          dataFrom: "keys",
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 120,
-          translateY: 0,
-          itemsSpacing: 2,
-          itemWidth: 100,
-          itemHeight: 20,
-          itemDirection: "left-to-right",
-          itemOpacity: 0.85,
-          symbolSize: 20,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemOpacity: 1,
-              },
-            },
-          ],
-        },
-      ]}
+      labelSkipHeight={0}
+      labelTextColor="black"
+      // legends={[
+      //   {
+      //     dataFrom: "keys",
+      //     anchor: "right",
+      //     direction: "column",
+      //     justify: false,
+      //     translateX: 120,
+      //     translateY: 0,
+      //     itemsSpacing: 2,
+      //     itemWidth: 100,
+      //     itemHeight: 20,
+      //     itemDirection: "left-to-right",
+      //     itemOpacity: 0.85,
+      //     symbolSize: 20,
+      //     effects: [
+      //       {
+      //         on: "hover",
+      //         style: {
+      //           itemOpacity: 1,
+      //         },
+      //       },
+      //     ],
+      //   },
+      // ]}
+      tooltip={({ id, value, indexValue }) => (
+        <div
+          style={{
+            color: "#000",         // Hover Font color set to black
+            background: "#fff", 
+            padding: "12px", 
+            borderRadius: "5px", 
+          }}
+        >
+          <strong>{id}</strong>: {value} from {indexValue}
+        </div>
+      )}
       role="application"
       barAriaLabel={function (e) {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
