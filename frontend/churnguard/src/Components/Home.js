@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { testHealth, deleteDatabase, uploadFile } from './services/apiService'; // Ensure the path matches your file structure
 import './Home.css';
+import Navbar from './Navbar.jsx';
 
-const Home = () => {
+function Home () {
     const [data, setData] = useState('');
     const [selectedFile, setSelectedFile] = useState(null); // for uploading data
 
@@ -56,8 +57,12 @@ const Home = () => {
 
     return (
         <div>
-            <div className="header">
-                <h1>Welcome to Churnguard!</h1>
+             <Navbar />
+             <div className="home-background">
+                <div className="header">
+                    <h1>Welcome to Churnguard!</h1>
+                    <h3>Your dedicated solution for predicting and preventing customer churn.</h3>
+                </div>
             </div>
             <button onClick={userDeleteDatabase}>Delete Database</button>
             <div>
@@ -68,4 +73,5 @@ const Home = () => {
     );
 };
 
-export default Home;
+
+export default Home; 
