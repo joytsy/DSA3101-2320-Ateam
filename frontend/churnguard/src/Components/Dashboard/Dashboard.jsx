@@ -142,7 +142,7 @@ const Dashboard = () => {
                 Churn Reasons
               </Typography>
             {/* </Box> */}
-            { <Box height="250px" mt="-20px" sx={{ padding: "5px 5px 5px 5px" }}>
+            { <Box height="260px" mt="-20px" sx={{ padding: "5px" }}>
               <ReasonsDoughnutChart isDashboard={true} />                         
             </Box> }
             {/* {mockTransactions.map((transaction, i) => (
