@@ -1,7 +1,8 @@
 from flask import Flask, request, send_from_directory, jsonify
 import pandas as pd
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument
 import atexit
+from bson import ObjectId
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -10,22 +11,16 @@ client = MongoClient("mongodb://mongo:27017/")
 db = client["AteamBank"]
 collection = db["customer_details"]
 
-def cleanup():
-    collection.delete_many({})
-
-atexit.register(cleanup)
-
 @app.route('/')
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
 
 # initialize the database
-@app.route('/upload', methods=['POST'])
+@app.route('/upload-all', methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
-        return "No file part", 400
     file = request.files['file']
+    print(file)
     if file.filename == '':
         return "No selected file", 400
     if file and file.filename.endswith('.xlsx'):
@@ -35,7 +30,7 @@ def upload_file():
         collection.insert_many(records)
         return "File successfully uploaded and data inserted into MongoDB", 200
     else:
-        return "Invalid file format. Only CSV files are allowed.", 400
+        return "Invalid file format. Only .xlsx files are allowed.", 400
 
 # Get all data from MongoDB
 @app.route('/data', methods=['GET'])
@@ -51,7 +46,7 @@ def get_data():
 def test():
     return "Good", 200
 
-@app.route('/delete-db', methods=['POST'])
+@app.route('/delete-all', methods=['DELETE'])
 def delete_database():
     # Iterate through all collections in the database and drop each
     collection_names = db.list_collection_names()
@@ -59,5 +54,81 @@ def delete_database():
         db[collection_name].drop()
     return "Database successfully deleted", 200
 
+# Deleting record
+@app.route('/delete-client', methods=['DELETE'])
+def delete_row():
+    if not request.json or 'id' not in request.json:
+        return jsonify({'error': 'Missing id in request'}), 400
+    # Extract the ID from the request and convert it to ObjectId
+    try:
+        id_to_delete = (request.json['id'])
+    except:
+        return jsonify({'error': 'Invalid ID format'}), 400
+    # Perform the deletion
+    result = collection.delete_one({'customer_id': id_to_delete})
+    # Check if a document was deleted
+    if result.deleted_count > 0:
+        return jsonify({'message': 'Row successfully deleted'}), 200
+    else:
+        return jsonify({'error': 'Row not found'}), 404
+
+@app.route('/create-client', methods=['POST'])
+def add_client():
+    try:
+        client_data = request.json
+
+        # Check if the customer_id already exists in the database
+        if 'customer_id' in client_data:
+            existing_client = collection.find_one({"customer_id": client_data['customer_id']})
+            if existing_client:
+                return jsonify({'error': 'A client with the given customer_id already exists'}), 400
+
+        # If _id is specified for some reason, ensure it's an ObjectId
+        if client_data.get('_id'):
+            client_data['_id'] = ObjectId(client_data['_id'])
+
+        result = collection.insert_one(client_data)
+        return jsonify({'message': 'Client added successfully', 'id': str(result.inserted_id)}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/update-client/<customer_id>', methods=['POST'])
+def update_client(customer_id):
+    try:
+        update_data = request.json
+        # Ensure _id and customer_id retains the original values
+        update_data.pop('_id', None) 
+        update_data.pop('customer_id', None)
+
+        # Find one client matching the customer_id and update it
+        result = collection.find_one_and_update(
+            {"customer_id": int(customer_id)}, 
+            {"$set": update_data},
+            return_document=ReturnDocument.AFTER
+        )
+        if result:
+            return jsonify({'message': 'Client updated successfully', 'id': str(result['_id'])}), 200
+        else:
+            return jsonify({'message': 'Client not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/read-client/<customer_id>', methods=['GET'])
+def read_client(customer_id):
+    try:
+        customer_id = int(customer_id)
+    except ValueError:
+        return jsonify({'error': 'customer_id must be an integer'}), 400
+
+    # Find the client by customer_id
+    client_data = collection.find_one({"customer_id": customer_id}, {"_id": 0}) 
+
+    if client_data:
+        return jsonify(client_data), 200
+    else:
+        return jsonify({'message': 'Client not found'}), 404
+
+
+# for inidividual testing
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
