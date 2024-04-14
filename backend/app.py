@@ -3,6 +3,7 @@ import pandas as pd
 from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
+import joblib
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -127,6 +128,21 @@ def read_client(customer_id):
         return jsonify(client_data), 200
     else:
         return jsonify({'message': 'Client not found'}), 404
+
+
+model = joblib.load('Gradient Boosting_best_model.pkl')      
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.get_json(force=True)
+        features = data['features']
+        prediction = model.predict([features])[0]
+        predicted_class = {
+            'prediction': prediction
+        }
+        return jsonify(predicted_class)
+    except Exception as e:
+        return jsonify({'error': str(e)})  
 
 
 # for inidividual testing
