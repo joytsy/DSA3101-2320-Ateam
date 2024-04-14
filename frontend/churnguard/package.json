@@ -12,12 +12,8 @@
     "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
-=======
-    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -30,7 +26,6 @@
     "@nivo/pie": "^0.85.1",
     "axios": "^1.6.8",
     "react-router-dom": "^6.22.3"
->>>>>>> 39e3b6f05253fe951267f2da4f791558e9f1b2d1
   },
   "scripts": {
     "start": "react-scripts start",
