@@ -1,0 +1,62 @@
+/* Apply styles only to the CustomerTable component */
+.customer-table-container {
+    margin: auto;
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling if the table exceeds the screen width */
+    /* padding: 1rem; */
+    background-color: #141b2d;
+}
+
+.customer-table {
+    margin: auto; /*Center the table within its container*/
+    width: 100%; /*Make the table span the full width of its container*/
+    border-collapse: collapse; 
+    border: 1px solid #ffffff; /* Add border to the table */
+    white-space: nowrap; /*Prevent text wrapping*/
+  }
+
+
+.customer-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.customer-table thead th,
+.customer-table-container td {
+    padding: 0.5rem;
+    text-align: left;
+    border-right: 1px solid #dddddd; /* Add right border to table cells */
+    color: #ffffff;
+}
+
+.customer-table-container th {
+    background-color: #141b2d;
+    border-bottom: 1px solid #ffffff; /* Add border below the table headers */
+    border-right: 1px solid #ffffff; /* Add right border to table headers */
+}
+
+.customer-table-container tbody tr {
+    border-bottom: 1px solid #dddddd; /* Add border between each row */
+} 
+
+.customer-table-container tbody tr:nth-child(even) {
+    background-color: #1e2a3a;
+    border-bottom: none; /* Remove bottom border for last row */
+}
+
+.customer-table-container tbody tr:hover {
+    background-color: #29415e;
+}
+
+.customer-table-container .white-button {
+    color: white;
+}
+
+.left {
+    /* position: absolute; */
+    /* left: 100px; */
+    width: 1000px;
+    padding: 10px;
+  }
+
