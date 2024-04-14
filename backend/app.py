@@ -3,6 +3,7 @@ import pandas as pd
 from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
+import bcrypt
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -127,6 +128,26 @@ def read_client(CustomerID):
         return jsonify(client_data), 200
     else:
         return jsonify({'message': 'Client not found'}), 404
+
+@app.route('/register', methods=['POST'])
+def register_user():
+    try:
+        user_data = request.json
+        password = user_data['password'].encode('utf-8')  # Encode the password to bytes
+
+        # Generate a salt and hash the password
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password, salt)
+
+        # Store the hashed password instead of the plain one
+        user_data['password'] = hashed_password.decode('utf-8')  # Store as string in DB
+
+        # Insert the rest of the user data into the database
+        result = collection.insert_one(user_data)
+        return jsonify({'message': 'User registered successfully', 'user_id': str(result.inserted_id)}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 
 # for inidividual testing
