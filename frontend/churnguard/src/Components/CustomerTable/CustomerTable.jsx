@@ -147,8 +147,9 @@ function CustomerTable() {
                 // Check if customerIdString contains the searchTerm
                 return customerIdString.includes(searchTerm);
             });
-            setFilteredData(filtered);
-        }, [searchTerm, data]);
+            setFilteredData(filtered.slice(0, rowsPerPage)); // Update filtered data and reset to first page
+            setCurrentPage(1); // Reset to first page
+        }, [searchTerm, data,rowsPerPage]);
     
         const handleSearchChange = (event) => {
             setSearchTerm(event.target.value);
@@ -199,31 +200,31 @@ function CustomerTable() {
 
 
     // Handle opening column filter menu
-    const handleOpenColumnFilter = (event, columnName) => {
-        setColumnFilterAnchorEl(event.currentTarget);
-        setSelectedColumn(columnName);
-    };
+    // const handleOpenColumnFilter = (event, columnName) => {
+    //     setColumnFilterAnchorEl(event.currentTarget);
+    //     setSelectedColumn(columnName);
+    // };
 
     // Handle closing column filter menu
-    const handleCloseColumnFilter = () => {
-        setColumnFilterAnchorEl(null);
-    };
-    const handleColumnFilterChange = (column, option) => {
-        const updatedFilters = {
-            ...columnFilters,
-            [column]: {
-                ...columnFilters[column],
-                [option]: !columnFilters[column][option]
-            }
-        };
-        setColumnFilters(updatedFilters);
-    };
+    // const handleCloseColumnFilter = () => {
+    //     setColumnFilterAnchorEl(null);
+    // };
+    // const handleColumnFilterChange = (column, option) => {
+    //     const updatedFilters = {
+    //         ...columnFilters,
+    //         [column]: {
+    //             ...columnFilters[column],
+    //             [option]: !columnFilters[column][option]
+    //         }
+    //     };
+    //     setColumnFilters(updatedFilters);
+    // };
 
     // Apply column filters
-    const applyColumnFilters = () => {
-        handleCloseColumnFilter();
+    // const applyColumnFilters = () => {
+    //     handleCloseColumnFilter();
         // Apply filters and update filteredData state
-    };
+    // };
 
 
     // useEffect(() => {
@@ -256,10 +257,7 @@ function CustomerTable() {
                             <th>Customer Name</th>
                             <th>Age</th>
                             <th>Email</th>
-                            <th>
-                                Employment Status
-                            </th>
-
+                            <th>Employment Status</th>
                             <th>Housing Status</th>
                             <th>Member Status</th>
                             <th>Country of Residence</th>
