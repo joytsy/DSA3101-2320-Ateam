@@ -129,7 +129,7 @@ def read_client(CustomerID):
     else:
         return jsonify({'message': 'Client not found'}), 404
     
-    
+
 @app.route('/login', methods=['POST'])
 def login_user():
     try:
@@ -153,7 +153,6 @@ def login_user():
 
     except Exception as e:
         return jsonify({'error': 'Server error'}), 500
-
 
 
 # for inidividual testing
