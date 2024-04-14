@@ -128,25 +128,31 @@ def read_client(CustomerID):
         return jsonify(client_data), 200
     else:
         return jsonify({'message': 'Client not found'}), 404
-
-@app.route('/register', methods=['POST'])
-def register_user():
+    
+    
+@app.route('/login', methods=['POST'])
+def login_user():
     try:
         user_data = request.json
-        password = user_data['password'].encode('utf-8')  # Encode the password to bytes
+        if not user_data or 'username' not in user_data or 'password' not in user_data:
+            return jsonify({'error': 'Missing username or password'}), 400
 
-        # Generate a salt and hash the password
-        salt = bcrypt.gensalt()
-        hashed_password = bcrypt.hashpw(password, salt)
+        username = user_data['username']
+        password = user_data['password'].encode('utf-8')
 
-        # Store the hashed password instead of the plain one
-        user_data['password'] = hashed_password.decode('utf-8')  # Store as string in DB
+        # Retrieve user from database
+        user = collection.find_one({"username": username})
+        if not user:
+            return jsonify({'error': 'Invalid username or password'}), 401
+        
+        # Verify the password
+        if bcrypt.checkpw(password, user['password'].encode('utf-8')):
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'error': 'Invalid username or password'}), 401
 
-        # Insert the rest of the user data into the database
-        result = collection.insert_one(user_data)
-        return jsonify({'message': 'User registered successfully', 'user_id': str(result.inserted_id)}), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': 'Server error'}), 500
 
 
 
