@@ -27,12 +27,12 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const churnData = {};
     
-    // Initialize churnData object with all months
+    // initialize churnData object with all months
     months.forEach(month => {
         churnData[month] = 0;
     });
     
-    // Calculate churn count for each month in the current year
+    // calculate churn count for each month in the current year
     data.forEach(customer => {
         if (customer.Churn === 1) {
             const lastTransactionDate = new Date(today - customer.DaysSinceLastTransaction * 24 * 60 * 60 * 1000);
@@ -45,10 +45,10 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
         }
         });
     
-        // Convert churnData into an array of objects compatible with Nivo chart
+        // convert churnData into an array of objects compatible with Nivo chart
         const transformedData = months.map(month => ({
             month,
-            churnCount: churnData[month] || 0 // Default to 0 if no churn data for the month
+            churnCount: churnData[month] || 0 // default to 0 if no churn data for the month
         }));
     
         return transformedData;
@@ -80,7 +80,7 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
                   strokeWidth: 1,
                 },
                 text: {
-                  fill: "colors.grey[100]",
+                  fill: colors.grey[100],
                 },
               },
             },

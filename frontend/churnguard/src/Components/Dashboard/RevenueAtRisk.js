@@ -12,7 +12,6 @@ function RevenueAtRisk() {
       .catch(err => console.log(err));
   }, []);
 
-  // Calculate total revenue at risk
   const RevenueAtRisk = data
     .filter(customer => 
       customer.Persona && 

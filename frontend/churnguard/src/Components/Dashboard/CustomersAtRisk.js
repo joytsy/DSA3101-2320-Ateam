@@ -8,9 +8,9 @@ function CustomersAtRisk() {
 
     useEffect(() => {
       axios.get("/data")
-        .then(res => res.data) // Assuming the response directly contains the data array
+        .then(res => res.data) 
         .then(data => setData(data.filter(customer => 
-          customer.Churn === 0 && // Churn equals 0
+          customer.Churn === 0 &&                              // not churned yet
           (customer.Persona === "CustomerServiceIssues" || 
           customer.Persona === "FinanciallyStrained" || 
           customer.Persona === "TechDifficulties")
@@ -18,7 +18,6 @@ function CustomersAtRisk() {
         .catch(err => console.log(err));
     }, []);
   
-    // Calculate the total number of unique customers at risk
     const total = data.reduce((acc, current) => {
       if (current.CustomerID && !acc.includes(current.CustomerID)) {
         return [...acc, current.CustomerID];
