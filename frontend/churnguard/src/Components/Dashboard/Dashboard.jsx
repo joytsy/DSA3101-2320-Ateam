@@ -18,10 +18,11 @@ const Dashboard = () => {
     const colors = tokens(theme.palette.mode);
   
     return (
+      <div className='dashboard_container'>
       <Box m="10px">
         {/* HEADER */}
         <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="CUSTOMER CHURN ANALYSIS DASHBOARD" subtitle="Overview of customer churn prediction and churn drivers" />
+          <Header title="CUSTOMER CHURN ANALYSIS DASHBOARD" subtitle="Overview of customer churn prediction and churn drivers" />
         </Box>
   
         {/* GRID & CHARTS */}
@@ -244,6 +245,7 @@ const Dashboard = () => {
           </Box>
         </Box>
       </Box>
+      </div>
     );
   };
   
