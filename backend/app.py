@@ -4,6 +4,9 @@ from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
 import joblib
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+import numpy as np
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -130,19 +133,40 @@ def read_client(customer_id):
         return jsonify({'message': 'Client not found'}), 404
 
 
-model = joblib.load('Gradient Boosting_best_model.pkl')      
+model = joblib.load('Gradient Boosting_best_model.pkl')    
+preprocessor = joblib.load('preprocessor.pkl')
+
 @app.route('/predict', methods=['POST'])
-def predict():
+# Define the features as expected based on your preprocessing code
+def predict():   
     try:
         data = request.get_json(force=True)
-        features = data['features']
-        prediction = model.predict([features])[0]
-        predicted_class = {
-            'prediction': prediction
-        }
-        return jsonify(predicted_class)
+
+        required_features = ['Age', 'EmploymentStatus', 'HousingStatus', 'ActiveMember', 'Country',
+                             'EstimatedSalary', 'Balance', 'Gender', 'ProductsNumber', 'DebitCard',
+                             'SavingsAccount', 'FlexiLoan', 'Tenure', 'DaysSinceLastTransaction',
+                             'CustomerEngagementScore', 'TechSupportTicketCount', 'NumberOfAppCrashes',
+                             'NavigationDifficulty', 'UserFrustration', 'CustomerSatisfactionSurvey',
+                             'CustomerServiceCalls', 'NPS']
+
+        # Check for the existence of all required features
+        if not all(feature in data for feature in required_features):
+            return jsonify({'error': 'Missing one or more of the required features'}), 400
+        
+        df = pd.DataFrame([data])
+        # Check that all columns are present after creating the DataFrame
+        if not all(column in df.columns for column in required_features):
+            return jsonify({'error': 'Missing one or more of the required features in DataFrame'}), 400
+
+        # Apply preprocessing
+        preprocessed_features = preprocessor.transform(df)
+        
+        # Predict using the preprocessed features
+        prediction = model.predict(preprocessed_features)[0]
+        return jsonify({'prediction': prediction})
+    
     except Exception as e:
-        return jsonify({'error': str(e)})  
+        return jsonify({'error': str(e)}), 500
 
 
 # for inidividual testing
