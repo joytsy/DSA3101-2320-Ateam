@@ -8,7 +8,9 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding-top: 50px;
+    padding-left: 220px;
+    padding-right: 220px;
+
 }
 
 .header {

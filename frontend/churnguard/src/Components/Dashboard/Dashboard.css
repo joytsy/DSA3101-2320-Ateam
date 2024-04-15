@@ -17,4 +17,10 @@ body {
 .dashboard_container {
     height: auto;
     width: auto;
+    background-color: #0c0120;
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 10px;
 }
+
+
