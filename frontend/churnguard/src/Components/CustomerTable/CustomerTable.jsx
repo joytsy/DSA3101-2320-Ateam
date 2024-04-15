@@ -7,10 +7,14 @@ import { getData } from '../services/apiService';
 import { Menu, MenuItem, Checkbox, IconButton } from '@mui/material';
 import { FilterList as FilterListIcon } from '@mui/icons-material';
 import Navbar from "./../Navbar.jsx";
+import {tokens} from "../../theme.js";
+import { Typography, useTheme } from "@mui/material";
 
 
 
 function CustomerTable() {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -241,7 +245,18 @@ function CustomerTable() {
         <div class="left">
         <Navbar/ >
         <div className='customer-table-container'>
-            <h1>Customer Details</h1>
+            {/* <h1>Customer Details</h1> */}
+            <Typography
+            variant="h2"
+            color={colors.grey[100]}
+            fontWeight="bold"
+            sx={{ m: "0 0 3px 0" }}
+            >
+            Customer Details
+            </Typography>
+            <Typography variant="h4" color="#e0e0e0" mb="30px">
+            Detailed breadown of customer details
+            </Typography>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

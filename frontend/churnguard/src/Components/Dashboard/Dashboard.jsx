@@ -37,7 +37,8 @@ const Dashboard = () => {
           {/* ROW 1 */}
           <Box
             gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -56,7 +57,8 @@ const Dashboard = () => {
           </Box>
           <Box
             gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -75,7 +77,8 @@ const Dashboard = () => {
           </Box>
           <Box
             gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -99,7 +102,8 @@ const Dashboard = () => {
           <Box
             gridColumn="span 7"
             gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
           >
               <Box>
                 <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
@@ -129,7 +133,8 @@ const Dashboard = () => {
           <Box
             gridColumn="span 5"
             gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
             // overflow="auto"
           >
             {/* <Box
@@ -147,44 +152,14 @@ const Dashboard = () => {
             { <Box height="260px" mt="-20px" sx={{ padding: "5px" }}>
               <ReasonsDoughnutChart isDashboard={true} />                         
             </Box> }
-            {/* {mockTransactions.map((transaction, i) => (
-              <Box
-                key={`${transaction.txId}-${i}`}
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                borderBottom={`4px solid ${colors.primary[500]}`}
-                p="15px"
-              >
-                <Box>
-                  <Typography
-                    color={colors.greenAccent[500]}
-                    variant="h5"
-                    fontWeight="600"
-                  >
-                    {transaction.txId}
-                  </Typography>
-                  <Typography color={colors.grey[100]}>
-                    {transaction.user}
-                  </Typography>
-                </Box>
-                <Box color={colors.grey[100]}>{transaction.date}</Box>
-                <Box
-                  backgroundColor={colors.greenAccent[500]}
-                  p="5px 10px"
-                  borderRadius="4px"
-                >
-                  ${transaction.cost}
-                </Box>
-              </Box>
-            ))} */}
           </Box>
   
           {/* ROW 3 */}
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
             // p="30px"
           >
             <Typography variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
@@ -193,27 +168,12 @@ const Dashboard = () => {
             { <Box height="250px" mt="-20px">
               <ProductBarChart isDashboard={true} />
             </Box> }
-            {/* <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              mt="25px"
-            >
-              <ProgressCircle size="125" />
-              <Typography
-                variant="h5"
-                color={colors.greenAccent[500]}
-                sx={{ mt: "15px" }}
-              >
-                $48,352 revenue generated
-              </Typography>
-              <Typography>Includes extra misc expenditures and costs</Typography>
-            </Box> */}
           </Box>
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
           >
             <Typography
               variant="h5"
@@ -229,7 +189,8 @@ const Dashboard = () => {
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
+            backgroundColor="#2e2148"
           >
             <Typography
               variant="h5"
@@ -241,9 +202,6 @@ const Dashboard = () => {
             { <Box height="250px" mt="-20px">
               <TenureBarChart isDashboard={true} />
             </Box> }
-            {/* <Box height="200px">
-              <GeographyChart isDashboard={true} />
-            </Box> */}
           </Box>
         </Box>
       </Box>
