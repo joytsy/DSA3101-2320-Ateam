@@ -96,7 +96,7 @@ const ReasonsDoughnutChart = () => {
         arcLinkLabelsColor={{ from: "color" }}
         enableArcLabels={true}          //enable arc label
         // arcLabelsRadiusOffset={0.4}
-        arcLabelsSkipAngle={10}
+        arcLabelsSkipAngle={1} //Skip label if corresponding arc's angle is lower than provided value
         arcLabelsTextColor="black"
         legends={[
           {

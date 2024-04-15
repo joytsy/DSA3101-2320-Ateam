@@ -1,3 +1,7 @@
+body {
+    background: linear-gradient(#f66f87, #5714bb);
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -98,4 +102,5 @@
     background: #EAEAEA;
     color: #676767;
 }
+
 

@@ -73,6 +73,7 @@ const LoginSignUp = () => {
     }, [canLogin]); // useEffect will trigger whenever 'canLogin' state changes
 
     return (
+        <div>
         <div className='container'>
             <div className="header">
                 <div className="text">{action}</div>
@@ -114,6 +115,7 @@ const LoginSignUp = () => {
                     Login
                 </div>
             </div>
+        </div>
         </div>
     )
 }
