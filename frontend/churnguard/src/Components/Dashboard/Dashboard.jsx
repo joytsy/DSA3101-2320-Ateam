@@ -12,6 +12,7 @@ import ChurnYTDLineChart from "./ChurnLineChart.js";
 import ReasonsDoughnutChart from "./ReasonsDoughnutChart.js";
 import CustomersAtRisk from "./CustomersAtRisk.js";
 import RevenueAtRisk from "./RevenueAtRisk.js";
+import Navbar from "./../Navbar.jsx";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -19,6 +20,7 @@ const Dashboard = () => {
   
     return (
       <div className='dashboard_container'>
+      <Navbar/ >
       <Box m="10px">
         {/* HEADER */}
         <Box display="flex" justifyContent="space-between" alignItems="center">

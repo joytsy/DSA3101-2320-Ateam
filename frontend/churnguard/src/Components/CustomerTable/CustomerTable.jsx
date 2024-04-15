@@ -6,7 +6,7 @@ import { getData } from '../services/apiService';
 // import { IconButton, Menu, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import { Menu, MenuItem, Checkbox, IconButton } from '@mui/material';
 import { FilterList as FilterListIcon } from '@mui/icons-material';
-
+import Navbar from "./../Navbar.jsx";
 
 
 
@@ -239,6 +239,7 @@ function CustomerTable() {
 
     return (
         <div class="left">
+        <Navbar/ >
         <div className='customer-table-container'>
             <h1>Customer Details</h1>
             <form onSubmit={handleSubmit}>
