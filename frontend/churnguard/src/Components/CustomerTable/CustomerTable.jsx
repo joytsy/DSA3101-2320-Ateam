@@ -9,6 +9,7 @@ import { FilterList as FilterListIcon } from '@mui/icons-material';
 import Navbar from "./../Navbar.jsx";
 import {tokens} from "../../theme.js";
 import { Typography, useTheme } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 
 
@@ -52,54 +53,6 @@ function CustomerTable() {
       };
 
 
-    // columns array
-    // const columns = [
-    //     {
-    //         Header: 'Customer ID',
-    //         accessor: 'CustomerID',
-    //         filterOptions: [] 
-    //     },
-    //     {
-    //         Header: 'Customer Name',
-    //         accessor: 'Name',
-    //         filterOptions: [] 
-    //     },
-    //     {
-    //         Header: 'Age',
-    //         accessor: 'Age',
-    //         filterOptions: [] 
-    //     },
-    //     {
-    //         Header: 'Email',
-    //         accessor: 'Email',
-    //         filterOptions: []
-    //     },
-    //     {
-    //         Header: 'Employment Status',
-    //         accessor: 'EmploymentStatus',
-    //         filterOptions: ['Full-time', 'Part-time/Unemployed']
-    //     },
-    //     {
-    //         Header: 'Housing Status',
-    //         accessor: 'HousingStatus',
-    //         filterOptions: ['Owned', 'Rented/No property']
-    //     },
-    //     {
-    //         Header: 'Member Status',
-    //         accessor: 'MemberStatus',
-    //         filterOptions: ['Active', 'Inactive']
-    //     },
-    //     {
-    //         Header: 'Country of Residence',
-    //         accessor: 'C',
-    //         filterOptions: ['Male', 'Female']
-    //     },
-    //     {
-    //         Header: 'Gender',
-    //         accessor: 'Gender',
-    //         filterOptions: ['Male', 'Female']
-    //     },
-    // ];
 
     
 
@@ -299,9 +252,9 @@ function CustomerTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((user, index) => (
-                            <tr key={index}>
-                                <td>{user.CustomerID}</td>
+                        {filteredData.map(user => (
+                            <tr key={user.CustomerID}>
+                                <td><Link to={`/customer/${user.CustomerID}`}>{user.CustomerID}</Link></td>
                                 <td>{user.Name}</td>
                                 <td>{user.Age}</td>
                                 <td>{user.Email}</td>
