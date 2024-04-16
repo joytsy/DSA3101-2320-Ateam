@@ -17,3 +17,7 @@
     text-align: center;
     font-size: 33px;
 }
+
+.home_body {
+    overflow-x: hidden;
+}

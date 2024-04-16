@@ -19,6 +19,7 @@ const Dashboard = () => {
     const colors = tokens(theme.palette.mode);
   
     return (
+     <div className='dashboard_body'>
       <div className='dashboard_container'>
       <Navbar/ >
       <Box m="10px">
@@ -206,6 +207,7 @@ const Dashboard = () => {
         </Box>
       </Box>
       </div>
+    </div>  
     );
   };
   

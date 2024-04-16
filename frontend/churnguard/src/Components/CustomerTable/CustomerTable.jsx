@@ -195,6 +195,7 @@ function CustomerTable() {
     // }, [data, columnFilters]);
 
     return (
+    <div className='cust_table_body'> 
         <div class="left">
         <Navbar/ >
         <div className='customer-table-container'>
@@ -307,6 +308,7 @@ function CustomerTable() {
             </div>
         </div>
         </div>
+    </div>       
     );
 }
 
