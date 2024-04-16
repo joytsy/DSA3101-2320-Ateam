@@ -12,12 +12,16 @@ function Customer() {
     const fetchData = async () => {
       try {
         const data = await getClientData(id);
-        setCustomer(data);
-        const suggestions = await getSuggestion(id);
-        setSuggestions(suggestions);
+        setCustomer(data)
       } catch (error) {
         setError('Failed to fetch data');
         console.error(error);
+      }
+      try {
+      const suggestions = await getSuggestion(id);
+      setSuggestions(suggestions);
+      } catch (error){
+        
       }
     };
 
