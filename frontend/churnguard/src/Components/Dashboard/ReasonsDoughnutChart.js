@@ -84,7 +84,7 @@ const ReasonsDoughnutChart = () => {
           },
         }}
         colors={{ scheme: 'set3' }}
-        margin={{ top: 30, right: 15, bottom: 50, left: 40 }}            //space that graph fills box
+        margin={{ top: 30, right: 50, bottom: 50, left: 90 }}            //space that graph fills box
         innerRadius={0.5}
         padAngle={0.7}
         cornerRadius={3}
@@ -96,34 +96,14 @@ const ReasonsDoughnutChart = () => {
         arcLinkLabelsColor={{ from: "color" }}
         enableArcLabels={true}          //enable arc label
         // arcLabelsRadiusOffset={0.4}
-        arcLabelsSkipAngle={10}
+        arcLabelsSkipAngle={1} //Skip label if corresponding arc's angle is lower than provided value
         arcLabelsTextColor="black"
-        // defs={[
-        //   {
-        //     id: "dots",
-        //     type: "patternDots",
-        //     background: "inherit",
-        //     color: "rgba(255, 255, 255, 0.3)",
-        //     size: 4,
-        //     padding: 1,
-        //     stagger: true,
-        //   },
-        //   {
-        //     id: "lines",
-        //     type: "patternLines",
-        //     background: "inherit",
-        //     color: "rgba(255, 255, 255, 0.3)",
-        //     rotation: -45,
-        //     lineWidth: 6,
-        //     spacing: 10,
-        //   },
-        // ]}
         legends={[
           {
             anchor: "left-bottom",
             direction: "column",
             justify: false,
-            translateX: -20,                // prevent legend from cutting barchart
+            translateX: -85,                // prevent legend from cutting barchart
             translateY: 90,
             itemsSpacing: 0,
             itemWidth: 100,

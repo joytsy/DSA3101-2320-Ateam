@@ -6,11 +6,15 @@ import { getData } from '../services/apiService';
 // import { IconButton, Menu, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import { Menu, MenuItem, Checkbox, IconButton } from '@mui/material';
 import { FilterList as FilterListIcon } from '@mui/icons-material';
-
+import Navbar from "./../Navbar.jsx";
+import {tokens} from "../../theme.js";
+import { Typography, useTheme } from "@mui/material";
 
 
 
 function CustomerTable() {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -145,10 +149,11 @@ function CustomerTable() {
                 // Convert user.CustomerID to string before using includes
                 const customerIdString = String(user.CustomerID);
                 // Check if customerIdString contains the searchTerm
-                return customerIdString.includes(searchTerm);
+                return customerIdString.startsWith(searchTerm);
             });
-            setFilteredData(filtered);
-        }, [searchTerm, data]);
+            setFilteredData(filtered.slice(0, rowsPerPage)); // Update filtered data and reset to first page
+            setCurrentPage(1); // Reset to first page
+        }, [searchTerm, data,rowsPerPage]);
     
         const handleSearchChange = (event) => {
             setSearchTerm(event.target.value);
@@ -199,31 +204,31 @@ function CustomerTable() {
 
 
     // Handle opening column filter menu
-    const handleOpenColumnFilter = (event, columnName) => {
-        setColumnFilterAnchorEl(event.currentTarget);
-        setSelectedColumn(columnName);
-    };
+    // const handleOpenColumnFilter = (event, columnName) => {
+    //     setColumnFilterAnchorEl(event.currentTarget);
+    //     setSelectedColumn(columnName);
+    // };
 
     // Handle closing column filter menu
-    const handleCloseColumnFilter = () => {
-        setColumnFilterAnchorEl(null);
-    };
-    const handleColumnFilterChange = (column, option) => {
-        const updatedFilters = {
-            ...columnFilters,
-            [column]: {
-                ...columnFilters[column],
-                [option]: !columnFilters[column][option]
-            }
-        };
-        setColumnFilters(updatedFilters);
-    };
+    // const handleCloseColumnFilter = () => {
+    //     setColumnFilterAnchorEl(null);
+    // };
+    // const handleColumnFilterChange = (column, option) => {
+    //     const updatedFilters = {
+    //         ...columnFilters,
+    //         [column]: {
+    //             ...columnFilters[column],
+    //             [option]: !columnFilters[column][option]
+    //         }
+    //     };
+    //     setColumnFilters(updatedFilters);
+    // };
 
     // Apply column filters
-    const applyColumnFilters = () => {
-        handleCloseColumnFilter();
+    // const applyColumnFilters = () => {
+    //     handleCloseColumnFilter();
         // Apply filters and update filteredData state
-    };
+    // };
 
 
     // useEffect(() => {
@@ -238,8 +243,20 @@ function CustomerTable() {
 
     return (
         <div class="left">
+        <Navbar/ >
         <div className='customer-table-container'>
-            <h1>Customer Details</h1>
+            {/* <h1>Customer Details</h1> */}
+            <Typography
+            variant="h2"
+            color={colors.grey[100]}
+            fontWeight="bold"
+            sx={{ m: "0 0 3px 0" }}
+            >
+            Customer Details
+            </Typography>
+            <Typography variant="h4" color="#e0e0e0" mb="30px">
+            Detailed breadown of customer details
+            </Typography>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -256,10 +273,7 @@ function CustomerTable() {
                             <th>Customer Name</th>
                             <th>Age</th>
                             <th>Email</th>
-                            <th>
-                                Employment Status
-                            </th>
-
+                            <th>Employment Status</th>
                             <th>Housing Status</th>
                             <th>Member Status</th>
                             <th>Country of Residence</th>

@@ -3,7 +3,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #141b2d;
+    /* background: #141b2d; */
+    background: #0c0120;
     color: #e0e0e0;
     font-family: "Source Sans Pro", sans-serif;
     display: flex;
@@ -12,9 +13,18 @@ body {
     align-items: center;
     height: 100%;             
     width: 100%;
+    overflow-x: hidden;
 }
 
 .dashboard_container {
-    height: auto;
-    width: auto;
+    height: 100vh;
+    width: 100vw;
+    background: #0c0120;
+    /* background: #141b2d; */
+    /* padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 10px; */
+    overflow-x: hidden;
 }
+
+
