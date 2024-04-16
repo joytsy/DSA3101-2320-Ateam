@@ -1,0 +1,9 @@
+.response-area {
+    width: 100%; /* Ensures it fills the column */
+    min-height: 150px; /* Adjust based on content needs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allows vertical resizing only */
+  }
+  

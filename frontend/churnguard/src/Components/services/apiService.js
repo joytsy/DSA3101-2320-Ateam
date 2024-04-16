@@ -30,6 +30,23 @@ export const getData = async () => {
   }
 };
 
+// Function to get client data from MongoDB
+export const getClientData = async (customerID) => {
+  try {
+    const response = await fetch(`/read-client/${customerID}`, {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    throw error; 
+  }
+};
+
 // Function to delete all data from Mongo
 export const deleteDatabase = async () => {
   try {
@@ -68,5 +85,106 @@ export const uploadFile = async (file) => {
   } catch (error) {
     console.error("Failed to upload file:", error);
     throw error; 
+  }
+};
+
+// Function to get suggested client data from MongoDB
+export const getSuggestion = async (customerID) => {
+  try {
+    const response = await fetch(`/suggest-client/${customerID}`, {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    throw error; 
+  }
+};
+
+// Function to delete a client by ID
+// JSON of {"id": int}
+export const deleteClient = async (clientId) => {
+  try {
+    const response = await fetch('/delete-client', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: clientId }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Failed to delete client:", error);
+    throw error;
+  }
+};
+
+// Function to add a new client
+// JSON of all the other information except _id
+export const addClient = async (clientData) => {
+  try {
+    const response = await fetch('/create-client', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(clientData),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Failed to add client:", error);
+    throw error;
+  }
+};
+
+// Function to update a client's information
+// ID of client in route
+// JSON of all the other data
+export const updateClient = async (customerId, updateData) => {
+  try {
+    const response = await fetch(`/update-client/${customerId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Failed to update client:", error);
+    throw error;
+  }
+};
+
+// Function to get client details by CustomerID
+export const readClient = async (customerId) => {
+  try {
+    const response = await fetch(`/read-client/${customerId}`, {
+      method: 'GET',
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch client details:", error);
+    throw error;
   }
 };

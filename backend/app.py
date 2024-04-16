@@ -3,6 +3,12 @@ import pandas as pd
 from pymongo import MongoClient, ReturnDocument
 import atexit
 from bson import ObjectId
+import bcrypt
+import pickle
+import joblib
+from dotenv import load_dotenv
+import os
+from h2ogpte import H2OGPTE
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -10,6 +16,31 @@ app = Flask(__name__, static_folder='frontend')
 client = MongoClient("mongodb://mongo:27017/")
 db = client["AteamBank"]
 collection = db["customer_details"]
+
+# LLM setup (H2O.AI)
+load_dotenv()
+api_key = os.getenv("API_KEY")
+
+llm_client = H2OGPTE(
+    address='https://h2ogpte.genai.h2o.ai',
+    api_key=api_key
+)
+# for gxs products
+gxs_collection_id = os.getenv("GXS_COLLECTION_ID")
+gxs_chat_id = os.getenv("GXS_CHAT_ID")
+
+# for general bank customer retention strategies 
+playbook_collection_id = os.getenv("CRM_PLAYBOOK_COLLECTION_ID")
+playbook_chat_id = os.getenv("CRM_PLAYBOOK_CHAT_ID")
+
+# the chat we use to recommend customer retention based on gxs products (combination of both the other 2 collections)
+recommendation_collection_id = os.getenv("RECOMMENDATION_COLLECTION_ID")
+recommendation_chat_id = os.getenv('RECOMMENDATION_CHAT_ID')
+
+# for prompt engineering
+pre_prompt = 'Imagine you are on the data science team of GXS, taking note that churn being 0 means no churn and churn being 1 means they have or are predicted to churn. If the client has a low balance and has churn = 1, it is likely that they have churned and withdrawn all their accounts, do take note of this when recommending. Take note that if churn is 0, we should recommend how to retain the customer by building brand loyalty for example. This is your clients information: '
+post_prompt = ' What would you recommend to the customer relations team to retain the customer in general, give 2 suggestions based on the products available (huge emphasis on this) and the customer profile. If there are any recommendations, make sure to suggest a GXS programme or product that can be recommended.'
+
 
 @app.route('/')
 def index():
@@ -65,7 +96,7 @@ def delete_row():
     except:
         return jsonify({'error': 'Invalid ID format'}), 400
     # Perform the deletion
-    result = collection.delete_one({'customer_id': id_to_delete})
+    result = collection.delete_one({'CustomerID': id_to_delete})
     # Check if a document was deleted
     if result.deleted_count > 0:
         return jsonify({'message': 'Row successfully deleted'}), 200
@@ -77,11 +108,11 @@ def add_client():
     try:
         client_data = request.json
 
-        # Check if the customer_id already exists in the database
-        if 'customer_id' in client_data:
-            existing_client = collection.find_one({"customer_id": client_data['customer_id']})
+        # Check if the CustomerID already exists in the database
+        if 'CustomerID' in client_data:
+            existing_client = collection.find_one({"CustomerID": client_data['CustomerID']})
             if existing_client:
-                return jsonify({'error': 'A client with the given customer_id already exists'}), 400
+                return jsonify({'error': 'A client with the given CustomerID already exists'}), 400
 
         # If _id is specified for some reason, ensure it's an ObjectId
         if client_data.get('_id'):
@@ -92,17 +123,17 @@ def add_client():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/update-client/<customer_id>', methods=['POST'])
-def update_client(customer_id):
+@app.route('/update-client/<CustomerID>', methods=['POST'])
+def update_client(CustomerID):
     try:
         update_data = request.json
         # Ensure _id and customer_id retains the original values
         update_data.pop('_id', None) 
-        update_data.pop('customer_id', None)
+        update_data.pop('CustomerID', None)
 
         # Find one client matching the customer_id and update it
         result = collection.find_one_and_update(
-            {"customer_id": int(customer_id)}, 
+            {"CustomerID": int(CustomerID)}, 
             {"$set": update_data},
             return_document=ReturnDocument.AFTER
         )
@@ -113,20 +144,45 @@ def update_client(customer_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/read-client/<customer_id>', methods=['GET'])
-def read_client(customer_id):
+@app.route('/read-client/<CustomerID>', methods=['GET'])
+def read_client(CustomerID):
     try:
-        customer_id = int(customer_id)
+        CustomerID = int(CustomerID)
     except ValueError:
-        return jsonify({'error': 'customer_id must be an integer'}), 400
+        return jsonify({'error': 'CustomerID must be an integer'}), 400
 
-    # Find the client by customer_id
-    client_data = collection.find_one({"customer_id": customer_id}, {"_id": 0}) 
+    # Find the client by CustomerID
+    client_data = collection.find_one({"CustomerID": CustomerID}, {"_id": 0}) 
 
     if client_data:
         return jsonify(client_data), 200
     else:
         return jsonify({'message': 'Client not found'}), 404
+    
+
+@app.route('/login', methods=['POST'])
+def login_user():
+    try:
+        user_data = request.json
+        if not user_data or 'username' not in user_data or 'password' not in user_data:
+            return jsonify({'error': 'Missing username or password'}), 400
+
+        username = user_data['username']
+        password = user_data['password'].encode('utf-8')
+
+        # Retrieve user from database
+        user = collection.find_one({"username": username})
+        if not user:
+            return jsonify({'error': 'Invalid username or password'}), 401
+        
+        # Verify the password
+        if bcrypt.checkpw(password, user['password'].encode('utf-8')):
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'error': 'Invalid username or password'}), 401
+
+    except Exception as e:
+        return jsonify({'error': 'Server error'}), 500
 
 
 # for inidividual testing
