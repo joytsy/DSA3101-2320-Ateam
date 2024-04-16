@@ -168,6 +168,44 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/batch-predict-update', methods=['GET'])
+def batch_predict_update():
+    try:
+        # Fetch data from MongoDB
+        records = collection.find({})
+        data_list = list(records)
+        for record in data_list:
+            record['_id'] = str(record['_id'])  # Convert ObjectId to string for JSON compatibility
+
+        # Ensure all records contain the required features
+        required_features = ['Age', 'EmploymentStatus', 'HousingStatus', 'ActiveMember', 'Country',
+                             'EstimatedSalary', 'Balance', 'Gender', 'ProductsNumber', 'DebitCard',
+                             'SavingsAccount', 'FlexiLoan', 'Tenure', 'DaysSinceLastTransaction',
+                             'CustomerEngagementScore', 'TechSupportTicketCount', 'NumberOfAppCrashes',
+                             'NavigationDifficulty', 'UserFrustration', 'CustomerSatisfactionSurvey',
+                             'CustomerServiceCalls', 'NPS']
+
+        # Convert list of dictionaries to DataFrame
+        df = pd.DataFrame(data_list)
+        
+        # Check that all columns are present
+        if not all(column in df.columns for column in required_features):
+            return jsonify({'error': 'Missing one or more of the required features in data'}), 400
+
+        # Apply preprocessing
+        preprocessed_features = preprocessor.transform(df[required_features])
+
+        # Predict using the preprocessed features
+        predictions = model.predict(preprocessed_features)
+
+        # Update MongoDB with the new 'Persona' predictions
+        for record, prediction in zip(data_list, predictions):
+            collection.update_one({'_id': ObjectId(record['_id'])}, {'$set': {'Persona': prediction}})
+
+        return jsonify({'message': 'Batch prediction and update completed successfully'}), 200
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # for inidividual testing
 if __name__ == '__main__':
