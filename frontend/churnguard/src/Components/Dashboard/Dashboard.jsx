@@ -13,6 +13,7 @@ import ReasonsDoughnutChart from "./ReasonsDoughnutChart.js";
 import CustomersAtRisk from "./CustomersAtRisk.js";
 import RevenueAtRisk from "./RevenueAtRisk.js";
 import Navbar from "./../Navbar.jsx";
+import Tooltip from "@mui/material/Tooltip";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -36,6 +37,14 @@ const Dashboard = () => {
           gap="20px"
         >
           {/* ROW 1 */}
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' }}>
+              Number of customers falling under the following personas are expected to churn - CustomerServiceIssues, TechDifficulties, FinanciallyStrained 
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             // backgroundColor={colors.primary[400]}
@@ -44,6 +53,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
+            {/* <Tooltip title="Customers falling under personas - CustomerServiceIssues, TechDifficulties, FinanciallyStrained"> */}
             <StatBox
               title="Customers at risk:"
               subtitle={
@@ -55,7 +65,9 @@ const Dashboard = () => {
                 // />
               }
             />
+            {/* </Tooltip> */}
           </Box>
+          </Tooltip>
           <Box
             gridColumn="span 4"
             // backgroundColor={colors.primary[400]}
@@ -131,6 +143,21 @@ const Dashboard = () => {
               <ChurnYTDLineChart isDashboard={true} />
             </Box>
           </Box>
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' ,minWidth: '300px'}}>
+              Elaboration of characteristics of each persona:<br />
+              1. Loyal | unlikely to churn | active member | high customer engagement score <br />
+              2. Opportunistic | likely to churn <br />
+              3. Customer Service Issues | likely to churn | low customer satisfaction <br />
+              4. Financially Strained | likely to churn | <br />
+              5. Technical Difficulties | likely to churn | <br />
+              6. Key Accounts | individuals with high salary and high balance <br />
+              7. General 
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 5"
             gridRow="span 2"
@@ -154,8 +181,17 @@ const Dashboard = () => {
               <ReasonsDoughnutChart isDashboard={true} />                         
             </Box> }
           </Box>
+          </Tooltip>
   
           {/* ROW 3 */}
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' }}>
+              Tracking the number of customers churned by product based on entire database data
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             gridRow="span 2"
@@ -170,6 +206,15 @@ const Dashboard = () => {
               <ProductBarChart isDashboard={true} />
             </Box> }
           </Box>
+          </Tooltip>
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' }}>
+              Tracking the number of customers churned by age based on entire database data
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             gridRow="span 2"
@@ -187,6 +232,15 @@ const Dashboard = () => {
               <AgeBarChart isDashboard={true} />
             </Box> }
           </Box>
+          </Tooltip>
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' }}>
+              Tracking the number of customers churned by tenure based on entire database data
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             gridRow="span 2"
@@ -204,6 +258,7 @@ const Dashboard = () => {
               <TenureBarChart isDashboard={true} />
             </Box> }
           </Box>
+          </Tooltip>
         </Box>
       </Box>
       </div>
