@@ -208,9 +208,12 @@ function CustomerTable() {
             >
             Customer Details
             </Typography>
-            <Typography variant="h4" color="#e0e0e0" mb="30px">
+            <Typography variant="h4" color="#e0e0e0" mb="20px">
             Detailed breadown of customer details
             </Typography>
+            <Typography variant="h5" color="#e0e0e0" mb="5px">
+                Click on each customer ID number to view more details of each customer. 
+                </Typography>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
