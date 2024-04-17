@@ -63,7 +63,12 @@ function Home () {
                     <h1>Welcome to Churnguard!</h1>
                     <h3>Your dedicated solution for predicting and preventing customer churn.</h3>
                 </div>
+                <div className="navigation-text">
+                    <p>Navigate to the dashboard for customer churn prediction analysis and metrics.</p>
+                    <p className="space-between-texts">Navigate to the customer table for detailed information about each customer.</p>
+                </div>
             </div>
+        
             {/* <button onClick={userDeleteDatabase}>Delete Database</button>
             <div>
                 <input type="file" onChange={handleFileChange} accept=".xlsx" />
