@@ -95,9 +95,6 @@ const LoginSignUp = () => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
             </div>
-            {action === "Sign Up" ? null : (
-                <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
-            )}
             <div className="submit-container">
                 <div
                     className={action === "Login" ? "submit gray" : "submit"}
