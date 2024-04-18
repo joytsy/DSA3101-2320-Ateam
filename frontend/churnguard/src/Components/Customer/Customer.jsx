@@ -65,20 +65,20 @@ function Customer() {
           <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 50}}>
           <div>
             <Typography
-            variant="h3"
+            variant="h4"
             color={colors.grey[100]}
             fontWeight="bold"
-            sx={{ m: "0 0 10px 0" }}>
+            sx={{ m: "0 0 10px 0", textDecoration: "underline" }}>
               Personal Information
               </Typography>
               {renderDataColumn(personalInfo)}
             </div>
             <div>
               <Typography
-                variant="h3"
+                variant="h4"
                 color={colors.grey[100]}
                 fontWeight="bold"
-                sx={{ m: "0 0 10px 0" }}
+                sx={{ m: "0 0 10px 0", textDecoration: "underline" }}
               >
                 Engagement Information
               </Typography>
@@ -86,10 +86,10 @@ function Customer() {
             </div>
             <div>
               <Typography
-                variant="h3"
+                variant="h4"
                 color={colors.grey[100]}
                 fontWeight="bold"
-                sx={{ m: "0 0 10px 0" }}
+                sx={{ m: "0 0 1px 0", textDecoration: "underline"}}
               >
                 Support Information
               </Typography>
@@ -97,10 +97,10 @@ function Customer() {
             </div>
             <div style={{ gridColumn: "1 / -1" }}> 
               <Typography
-                variant="h3"
+                variant="h4"
                 color={colors.grey[100]}
                 fontWeight="bold"
-                sx={{ m: "0 0 5px 0" }}
+                sx={{ m: "0 0 5px 0"}}
                 >
                   Suggestions for the Customer
                 </Typography>
