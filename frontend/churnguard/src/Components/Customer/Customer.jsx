@@ -62,22 +62,52 @@ function Customer() {
                 sx={{ m: "0 0 10px 10px" }}
                 >Customer Profile & Suggestions: {customer.Name} 
                 </Typography> 
-          <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr) 3fr", gridGap: 50, paddingLeft: '20px' }}>
-            {renderDataColumn(personalInfo)}
-            {renderDataColumn(engagementInfo)}
-            {renderDataColumn(supportInfo)}
+          <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 50}}>
+          <div>
+            <Typography
+            variant="h3"
+            color={colors.grey[100]}
+            fontWeight="bold"
+            sx={{ m: "0 0 10px 0" }}>
+              Personal Information
+              </Typography>
+              {renderDataColumn(personalInfo)}
+            </div>
+            <div>
+              <Typography
+                variant="h3"
+                color={colors.grey[100]}
+                fontWeight="bold"
+                sx={{ m: "0 0 10px 0" }}
+              >
+                Engagement Information
+              </Typography>
+              {renderDataColumn(engagementInfo)}
+            </div>
+            <div>
+              <Typography
+                variant="h3"
+                color={colors.grey[100]}
+                fontWeight="bold"
+                sx={{ m: "0 0 10px 0" }}
+              >
+                Support Information
+              </Typography>
+              {renderDataColumn(supportInfo)}
+            </div>
             <div style={{ gridColumn: "1 / -1" }}> 
               <Typography
                 variant="h3"
                 color={colors.grey[100]}
                 fontWeight="bold"
                 sx={{ m: "0 0 5px 0" }}
-                >Suggestions for the Customer</Typography>
-              <textarea className="response-area" readOnly value={suggestions} placeholder="Loading suggestions..." style={{ height: '200px', width: '100%' }}></textarea> 
+                >
+                  Suggestions for the Customer
+                </Typography>
+              <textarea className="response-area" readOnly value={suggestions} placeholder="Loading suggestions..." style={{ height: '200px', width: '100%', backgroundColor: '#8d7cabb7' }}></textarea> 
             </div>
           </div>
         </div>
-        <div class="test">hi</div>
       </div>
     </div>
   );
