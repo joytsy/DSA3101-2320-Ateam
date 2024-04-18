@@ -109,7 +109,7 @@ const LoginSignUp = () => {
                     onClick={(e)=>{login(e); toggleAction(e); }}
                     
                 >
-                    Login
+                    Login to Churnguard
                 </div>
             </div>
         </div>
