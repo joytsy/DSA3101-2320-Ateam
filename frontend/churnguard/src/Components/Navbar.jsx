@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './Navbar.css';
-import logo from './churnguard logo.png';
+import logo from './logo.png';
 
 function Navbar() {
     const [active, setActive] = useState("nav__menu");
