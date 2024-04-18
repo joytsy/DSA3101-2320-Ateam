@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Navbar.css';
+import logo from './churnguard logo.png';
 
 function Navbar() {
     const [active, setActive] = useState("nav__menu");
@@ -35,16 +36,17 @@ function Navbar() {
       <nav className="nav">
         <a href="#" className="nav__brand">Churnguard</a>
         <ul className={active}>
-          <li className="nav__item"><a className="nav__link" onClick={redirectToHome}>Home</a></li>
-          <li className="nav__item"><a className="nav__link" onClick={redirectToDashboard}>Dashboard</a></li>
-          <li className="nav__item"><a className="nav__link" onClick={redirectToCustomerTable}>Customer Table</a></li>
-          <li className="nav__item"><a className="nav__link" onClick={redirectToLogin}>Logout</a></li>
+          <li className="nav__item"><a className="nav__link" onClick={redirectToHome} style={{cursor:'pointer'}}>Home</a></li>
+          <li className="nav__item"><a className="nav__link" onClick={redirectToDashboard} style={{cursor:'pointer'}}>Dashboard</a></li>
+          <li className="nav__item"><a className="nav__link" onClick={redirectToCustomerTable} style={{cursor:'pointer'}}>Customer Table</a></li>
+          <li className="nav__item"><a className="nav__link" onClick={redirectToLogin} style={{cursor:'pointer'}}>Logout</a></li>
         </ul>
         <div onClick = {navToggle} className={toggleIcon}>
           <div className="line1"></div>
           <div className="line2"></div>
           <div className="line3"></div>
         </div>
+        <img src={logo} alt="Logo" className="logo" />
       </nav>
   );
 }
