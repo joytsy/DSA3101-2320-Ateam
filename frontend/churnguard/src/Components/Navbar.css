@@ -85,8 +85,3 @@ a{
 .toggle .line3 {
     transform: rotate(45deg) translate(-4px, -5px);
 }
-
-.logo {
-    width: 50px; /* Adjust the size as needed */
-    height: auto; /* Maintain aspect ratio */
-}
