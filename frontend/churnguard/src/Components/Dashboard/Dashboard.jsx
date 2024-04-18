@@ -142,7 +142,7 @@ const Dashboard = () => {
           placement="top"
           >
           <Box
-            gridColumn="span 7"
+            gridColumn="span 6"
             gridRow="span 2"
             // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
@@ -175,21 +175,21 @@ const Dashboard = () => {
           </Tooltip>
           <Tooltip
           title={
-            <span style={{ fontSize: '14px' ,width: '600px'}}>
+            <span style={{ fontSize: '14px' ,width: '700px'}}>
               Types of Customer Persona:<br />
               <br />
-              FS: Financially Strained | likely to churn<br />
-              O: Opportunistic<br />
-              G: General<br />
-              TD: Technical Difficulties | likely to churn<br />
-              L: Loyal<br />
-              CSI: Customer Service Issues | likely to churn
+              FS:&nbsp;&nbsp;Financially Strained (likely to churn)<br />
+              O:&nbsp;&nbsp;&nbsp;&nbsp;Opportunistic<br />
+              G:&nbsp;&nbsp;&nbsp;&nbsp;General<br />
+              TD:&nbsp;&nbsp;Technical Difficulties (likely to churn)<br />
+              L:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loyal<br />
+              CSI:&nbsp;Customer Service Issues (likely to churn)
             </span>
           }
           placement="top"
           >
           <Box
-            gridColumn="span 5"
+            gridColumn="span 6"
             gridRow="span 2"
             // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
@@ -204,7 +204,7 @@ const Dashboard = () => {
               p="15px"
             > */}
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
-                Customer Personas
+                Customer Personas (Hover above chart to understand abbrevations used)
               </Typography>
             {/* </Box> */}
             { <Box height="260px" mt="-20px" sx={{ padding: "5px" }}>

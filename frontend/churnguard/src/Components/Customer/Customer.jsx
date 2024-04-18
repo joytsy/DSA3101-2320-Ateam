@@ -62,7 +62,7 @@ function Customer() {
                 sx={{ m: "0 0 10px 10px" }}
                 >Customer Profile & Suggestions: {customer.Name} 
                 </Typography> 
-          <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 50}}>
+          <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 50, marginLeft: "20px", marginRight: "20px"}}>
           <div>
             <Typography
             variant="h4"
@@ -95,7 +95,7 @@ function Customer() {
               </Typography>
               {renderDataColumn(supportInfo)}
             </div>
-            <div style={{ gridColumn: "1 / -1" }}> 
+            <div style={{ gridColumn: "1 / -1"}}> 
               <Typography
                 variant="h4"
                 color={colors.grey[100]}

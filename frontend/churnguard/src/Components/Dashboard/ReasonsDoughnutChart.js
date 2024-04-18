@@ -79,7 +79,8 @@ const ReasonsDoughnutChart = ({ isDashboard = false}) => {
     // Map persona IDs to their formatted labels and transform data
     const transformedData = Object.entries(personaGroups).map(([persona, count]) => ({
         id: personaLabels[persona], // Use formatted label instead of ID
-        value: count
+        value: count,
+        label: personaGroups[persona]
     }));
 
     return transformedData;
@@ -122,7 +123,7 @@ const ReasonsDoughnutChart = ({ isDashboard = false}) => {
       }}
       keys={["value"]}
       indexBy="id"
-      margin={{ top: 20, right: 30, bottom: 50, left: 70 }}
+      margin={{ top: 30, right: 80, bottom: 50, left: 80 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
@@ -134,11 +135,11 @@ const ReasonsDoughnutChart = ({ isDashboard = false}) => {
       axisRight={null}
       axisBottom={{
         tickSize: 5,
-        tickPadding: 1,
+        tickPadding: 5,
         tickRotation: 0,
         legend: "Predicted Customer Persona", // changed
         legendPosition: "middle",
-        legendOffset: 40,
+        legendOffset: 36,
         tickValues: "every 1", // Set tick values to display all labels
         // truncateTickAt: 5,
       }}
@@ -156,11 +157,11 @@ const ReasonsDoughnutChart = ({ isDashboard = false}) => {
       labelTextColor="black"
       // legends={[
       //   {
-      //     dataFrom: "keys",
-      //     anchor: "right",
+      //     dataFrom: "data",
+      //     anchor: "right",                     // change anchor to "right"
       //     direction: "column",
       //     justify: false,
-      //     translateX: 120,
+      //     translateX: 120,                      // adjust translateX for proper positioning
       //     translateY: 0,
       //     itemsSpacing: 2,
       //     itemWidth: 100,
@@ -191,9 +192,6 @@ const ReasonsDoughnutChart = ({ isDashboard = false}) => {
         </div>
       )}
       role="application"
-      barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-      }}
     />
   );
 };
