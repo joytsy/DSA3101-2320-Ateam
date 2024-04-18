@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Navbar.css';
+import logo from './logo.png';
 
 function Navbar() {
     const [active, setActive] = useState("nav__menu");
@@ -45,6 +46,7 @@ function Navbar() {
           <div className="line2"></div>
           <div className="line3"></div>
         </div>
+        <img src={logo} alt="Logo" className="logo" />
       </nav>
   );
 }
