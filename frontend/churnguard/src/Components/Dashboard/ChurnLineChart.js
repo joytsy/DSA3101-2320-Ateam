@@ -96,7 +96,7 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
             },
             text: {
                 fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace',
-                fill: "yellow",     // coloue of point label
+                fill: "#4cceac",     // coloue of point label
               },
           }}
           colors={{ scheme: 'nivo' }} 

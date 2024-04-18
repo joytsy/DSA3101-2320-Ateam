@@ -98,8 +98,9 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: 'pastel1' }}
-      colorBy="indexValue"                         //bar colours
+      // colors={{ scheme: 'set3' }}
+      colors="#F7D1D8"
+      // colorBy="indexValue"                         //bar colours
       borderColor="black"
       axisTop={null}
       axisRight={null}

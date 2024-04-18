@@ -95,27 +95,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: 'pastel1' }}
-      colorBy="indexValue"
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
+      // colorBy="indexValue"
       borderColor="black"
       axisTop={null}
       axisRight={null}

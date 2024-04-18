@@ -26,7 +26,7 @@ const Dashboard = () => {
       <Box m="10px">
         {/* HEADER */}
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Header title="CUSTOMER CHURN ANALYSIS DASHBOARD" subtitle="Overview of customer churn prediction and churn drivers" />
+          <Header title="CUSTOMER CHURN ANALYSIS DASHBOARD" subtitle="Overview of customer churn prediction and churn drivers | Hover over each chart for explanations" />
         </Box>
   
         {/* GRID & CHARTS */}
@@ -40,7 +40,10 @@ const Dashboard = () => {
           <Tooltip
           title={
             <span style={{ fontSize: '14px' }}>
-              Number of customers falling under the following personas are expected to churn - CustomerServiceIssues, TechDifficulties, FinanciallyStrained 
+              Number of customers falling under the following personas are expected to churn:<br />
+              "Customer Service Issues",<br />
+              "Technical Difficulties",<br />
+              "Financially Strained" 
             </span>
           }
           placement="top"
@@ -55,7 +58,7 @@ const Dashboard = () => {
           >
             {/* <Tooltip title="Customers falling under personas - CustomerServiceIssues, TechDifficulties, FinanciallyStrained"> */}
             <StatBox
-              title="Customers at risk:"
+              title="Customers At Risk (High Chance of Retainment):"
               subtitle={
                 <CustomersAtRisk />
               }
@@ -68,6 +71,14 @@ const Dashboard = () => {
             {/* </Tooltip> */}
           </Box>
           </Tooltip>
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' ,width: '600px'}}>
+              Total number of customers who have not churned, including customers at risk of churn
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             // backgroundColor={colors.primary[400]}
@@ -77,7 +88,7 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title="Total number of customers: "
+              title="Total Number Of Active Customers: "
               subtitle={
                 <TotalCustomers />
               }
@@ -88,6 +99,15 @@ const Dashboard = () => {
               }
             />
           </Box>
+          </Tooltip>
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' ,width: '600px'}}>
+              Total revenue at risk from balance of customers owning GXS Savings Account
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 4"
             // backgroundColor={colors.primary[400]}
@@ -97,7 +117,7 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title="Revenue at risk (from GXS savings account):"
+              title="Revenue At Risk (from GXS savings account):"
               subtitle={
                 <RevenueAtRisk />
               }
@@ -110,8 +130,17 @@ const Dashboard = () => {
               }
             />
           </Box>
+          </Tooltip>
   
           {/* ROW 2 */}
+          <Tooltip
+          title={
+            <span style={{ fontSize: '14px' ,width: '600px'}}>
+              Number of unique customers who have churned for each month
+            </span>
+          }
+          placement="top"
+          >
           <Box
             gridColumn="span 7"
             gridRow="span 2"
@@ -143,17 +172,18 @@ const Dashboard = () => {
               <ChurnYTDLineChart isDashboard={true} />
             </Box>
           </Box>
+          </Tooltip>
           <Tooltip
           title={
-            <span style={{ fontSize: '14px' ,minWidth: '300px'}}>
-              Elaboration of characteristics of each persona:<br />
-              1. Loyal | unlikely to churn | active member | high customer engagement score <br />
-              2. Opportunistic | likely to churn <br />
-              3. Customer Service Issues | likely to churn | low customer satisfaction <br />
-              4. Financially Strained | likely to churn | <br />
-              5. Technical Difficulties | likely to churn | <br />
-              6. Key Accounts | individuals with high salary and high balance <br />
-              7. General 
+            <span style={{ fontSize: '14px' ,width: '600px'}}>
+              Types of Customer Persona:<br />
+              <br />
+              FS: Financially Strained | likely to churn<br />
+              O: Opportunistic<br />
+              G: General<br />
+              TD: Technical Difficulties | likely to churn<br />
+              L: Loyal<br />
+              CSI: Customer Service Issues | likely to churn
             </span>
           }
           placement="top"
@@ -174,7 +204,7 @@ const Dashboard = () => {
               p="15px"
             > */}
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
-                Churn Reasons
+                Customer Personas
               </Typography>
             {/* </Box> */}
             { <Box height="260px" mt="-20px" sx={{ padding: "5px" }}>
