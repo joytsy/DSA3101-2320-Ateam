@@ -23,7 +23,7 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
     // Function to group data by tenure ranges
     const groupDataByTenure = (data) => {
       const tenureGroups = {
-        "0": [],
+        // "0": [],
         // "0.5": [],
         "1": [],
         "2": [],
@@ -98,8 +98,8 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: 'pastel1' }}
-      colorBy="indexValue"
+      colors={{ scheme: 'nivo' }}
+      // colorBy="indexValue"
       borderColor="black"
       axisTop={null}
       axisRight={null}

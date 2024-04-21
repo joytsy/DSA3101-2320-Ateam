@@ -11,8 +11,17 @@ function TotalCustomers() {
       .catch(err => console.log(err));
   }, []);
 
-  // Calculate the total number of unique customers
-  const total = data.reduce((acc, current) => {
+  // // Calculate the total number of unique customers
+  // const total = data.reduce((acc, current) => {
+  //   if (current.CustomerID && !acc.includes(current.CustomerID)) {
+  //     return [...acc, current.CustomerID];
+  //   }
+  //   return acc;
+  // }, []).length;
+
+  // Calculate only total customers who are ACTIVE customers
+  const total = data.filter(customer => customer.Churn !== 1)
+  .reduce((acc, current) => {
     if (current.CustomerID && !acc.includes(current.CustomerID)) {
       return [...acc, current.CustomerID];
     }

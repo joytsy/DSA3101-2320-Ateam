@@ -96,11 +96,11 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
             },
             text: {
                 fontFamily: '\'SFMono-Regular\', Consolas, \'Liberation Mono\', Menlo, Courier, monospace',
-                fill: "yellow",     // coloue of point label
+                fill: "#4cceac",     // coloue of point label
               },
           }}
           colors={{ scheme: 'nivo' }} 
-          margin={{ top: 50, right: 120, bottom: 50, left: 70 }}
+          margin={{ top: 50, right: 80, bottom: 50, left: 70 }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
@@ -142,32 +142,32 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
           useMesh={true}
-          legends={[
-            {
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 100,
-              translateY: 0,
-              itemsSpacing: 0,
-              itemDirection: "left-to-right",
-              itemWidth: 80,
-              itemHeight: 20,
-              itemOpacity: 1,
-              symbolSize: 12,
-              symbolShape: "circle",
-              symbolBorderColor: "rgba(0, 0, 0, .5)",
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemBackground: "rgba(0, 0, 0, .03)",
-                    itemOpacity: 1,
-                  },
-                },
-              ],
-            },
-          ]}
+          // legends={[
+          //   {
+          //     anchor: "bottom-right",
+          //     direction: "column",
+          //     justify: false,
+          //     translateX: 100,
+          //     translateY: 0,
+          //     itemsSpacing: 0,
+          //     itemDirection: "left-to-right",
+          //     itemWidth: 80,
+          //     itemHeight: 20,
+          //     itemOpacity: 1,
+          //     symbolSize: 12,
+          //     symbolShape: "circle",
+          //     symbolBorderColor: "rgba(0, 0, 0, .5)",
+          //     effects: [
+          //       {
+          //         on: "hover",
+          //         style: {
+          //           itemBackground: "rgba(0, 0, 0, .03)",
+          //           itemOpacity: 1,
+          //         },
+          //       },
+          //     ],
+          //   },
+          // ]}
           tooltip={({ point }) => (
             <div
                 style={{

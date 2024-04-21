@@ -23,7 +23,14 @@ function RevenueAtRisk() {
       return acc + customer.Balance;
     }, 0);
 
-  return ("$" + RevenueAtRisk);
+    // const formattedRevenueAtRisk = RevenueAtRisk.toFixed(2);
+    // add commas between large numbers, max 2 decimal places
+    const formattedRevenueAtRisk = RevenueAtRisk.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+  return ("$" + formattedRevenueAtRisk);
 }
 
 export default RevenueAtRisk;

@@ -8,10 +8,24 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding-top: 50px;
+    padding-left: 220px;
+    padding-right: 220px;
+
 }
 
 .header {
-    text-align: center;
+    text-align: left;
     font-size: 33px;
+    margin-bottom: 20px;
+}
+
+.home_body {
+    overflow-x: hidden;
+}
+.navigation-text{
+    font-size: 22px;
+    color: #8653e3;
+}
+.space-between-texts {
+    margin-top: 20px; /* Adjust as needed */
 }

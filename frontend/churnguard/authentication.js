@@ -20,13 +20,16 @@ app.post('/register', (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
 
-    db.query(
-        "INSERT INTO users (name, password, email) VALUES (?,?,?)", 
-        [name, password, email], 
-        (err, result) => {
-            console.log(err);
-        }
-    );
+    if (name != "" & password != "" & email != "") {
+        db.query(
+            "INSERT INTO users (name, password, email) VALUES (?,?,?)", 
+            [name, password, email], 
+            (err, result) => {
+                console.log(err);
+            }
+        );
+    }
+
 });
 
 // To check if email and password combination is correct.

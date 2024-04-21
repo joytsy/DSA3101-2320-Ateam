@@ -210,7 +210,6 @@ def suggest_product(CustomerID):
     else:
         return jsonify({'message': 'Client not found'}), 404
 
-
 # for inidividual testing
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)

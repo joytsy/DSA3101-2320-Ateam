@@ -15,3 +15,41 @@ code {
 }
 
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Horizontal scrollbar */
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+/* Horizontal scrollbar track */
+::-webkit-scrollbar-track:horizontal {
+  background: #e0e0e0;
+}
+
+/* Horizontal scrollbar thumb */
+::-webkit-scrollbar-thumb:horizontal {
+  background: #888;
+}
+
+/* Horizontal scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background: #555;
+}

@@ -73,6 +73,7 @@ const LoginSignUp = () => {
     }, [canLogin]); // useEffect will trigger whenever 'canLogin' state changes
 
     return (
+        <div>
         <div className='container'>
             <div className="header">
                 <div className="text">{action}</div>
@@ -94,9 +95,6 @@ const LoginSignUp = () => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
             </div>
-            {action === "Sign Up" ? null : (
-                <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
-            )}
             <div className="submit-container">
                 <div
                     className={action === "Login" ? "submit gray" : "submit"}
@@ -111,9 +109,10 @@ const LoginSignUp = () => {
                     onClick={(e)=>{login(e); toggleAction(e); }}
                     
                 >
-                    Login
+                    Login to Churnguard
                 </div>
             </div>
+        </div>
         </div>
     )
 }
