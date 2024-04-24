@@ -12,6 +12,10 @@ services:
       - FLASK_ENV=development
     depends_on:
       - mongo
+  app:
+    build: ./frontend/churnguard
+    ports:
+      - 8000:80
 
   mongo:
     image: mongo:latest
