@@ -6,7 +6,7 @@ EXPOSE 3000
 # set working directory
 WORKDIR /churnguard
 
-# add `/app/node_modules/.bin` to $PATH
+# add `/churnguard/node_modules/.bin` to $PATH
 ENV PATH /churnguard/node_modules/.bin:$PATH
 
 # install app dependencies
