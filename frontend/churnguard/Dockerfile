@@ -18,6 +18,8 @@
 # pull official base image
 FROM node:19.8.1-alpine3.17
 
+EXPOSE 3000
+
 # set working directory
 WORKDIR /churnguard
 
@@ -25,7 +27,7 @@ WORKDIR /churnguard
 ENV PATH /churnguard/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY package.json ./
+COPY package*.json ./
 
 RUN npm install 
 
