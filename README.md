@@ -1,4 +1,4 @@
-# DSA3101-2320-Ateam 
+# Churnguard - DSA3101-2320-Ateam Predictive Analysis for Customer Churn
 ## Start up
 To get started,
 
