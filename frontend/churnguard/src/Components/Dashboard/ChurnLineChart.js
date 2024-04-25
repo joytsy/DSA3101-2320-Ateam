@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
+// code for "Customer Churn per month" line chart on Dashboard
 const ChurnLineChart  =  ({ isDashboard = false}) => { 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -142,32 +143,6 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
           useMesh={true}
-          // legends={[
-          //   {
-          //     anchor: "bottom-right",
-          //     direction: "column",
-          //     justify: false,
-          //     translateX: 100,
-          //     translateY: 0,
-          //     itemsSpacing: 0,
-          //     itemDirection: "left-to-right",
-          //     itemWidth: 80,
-          //     itemHeight: 20,
-          //     itemOpacity: 1,
-          //     symbolSize: 12,
-          //     symbolShape: "circle",
-          //     symbolBorderColor: "rgba(0, 0, 0, .5)",
-          //     effects: [
-          //       {
-          //         on: "hover",
-          //         style: {
-          //           itemBackground: "rgba(0, 0, 0, .03)",
-          //           itemOpacity: 1,
-          //         },
-          //       },
-          //     ],
-          //   },
-          // ]}
           tooltip={({ point }) => (
             <div
                 style={{
@@ -184,6 +159,4 @@ const ChurnLineChart  =  ({ isDashboard = false}) => {
       );
     };
 
-
-  
 export default ChurnLineChart;

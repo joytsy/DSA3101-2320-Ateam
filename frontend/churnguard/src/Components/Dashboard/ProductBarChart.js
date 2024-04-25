@@ -4,6 +4,7 @@ import { tokens } from "../../theme";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
+// Code for  "Churn by Product" bar chart on Dashboard
 const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as prop
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -81,7 +82,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         },
         legends: {
           text: {
-            fill: colors.grey[100],   //colour of legend "Churn"
+            fill: colors.grey[100],                  //colour of legend "Churn"
           },
         },
         text: {
@@ -95,7 +96,6 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: 'pastel1' }}
-      // colorBy="indexValue"
       borderColor="black"
       axisTop={null}
       axisRight={null}
@@ -103,7 +103,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "GXS Products", // changed
+        legend: "GXS Products", 
         legendPosition: "middle",
         legendOffset: 40,
       }}
@@ -111,7 +111,7 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Number of Customers", // changed
+        legend: "Number of Customers", 
         legendPosition: "middle",
         legendOffset: -45,
       }}
@@ -119,34 +119,10 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
       labelSkipWidth={12}
       labelSkipHeight={0}
       labelTextColor="black"
-      // legends={[
-      //   {
-      //     dataFrom: "keys",
-      //     anchor: "right",
-      //     direction: "column",
-      //     justify: false,
-      //     translateX: 120,
-      //     translateY: 0,
-      //     itemsSpacing: 2,
-      //     itemWidth: 100,
-      //     itemHeight: 20,
-      //     itemDirection: "left-to-right",
-      //     itemOpacity: 0.85,
-      //     symbolSize: 20,
-      //     effects: [
-      //       {
-      //         on: "hover",
-      //         style: {
-      //           itemOpacity: 1,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // ]}
       tooltip={({ id, value, indexValue }) => (
         <div
           style={{
-            color: "#000",         // Hover Font color set to black
+            color: "#000",                          // Hover Font color set to black
             background: "#fff", 
             padding: "12px", 
             borderRadius: "5px", 
@@ -156,9 +132,6 @@ const ProductBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard'
         </div>
       )}
       role="application"
-      barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-      }}
     />
   );
 };

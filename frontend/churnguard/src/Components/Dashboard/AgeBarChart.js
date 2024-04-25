@@ -4,6 +4,7 @@ import { tokens } from "../../theme";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
+// code for "Churn by Age" bar chart on Dashboard
 const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as prop
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -100,7 +101,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       indexScale={{ type: "band", round: true }}
       // colors={{ scheme: 'set3' }}
       colors="#F7D1D8"
-      // colorBy="indexValue"                         //bar colours
+      // colorBy="indexValue"                        //bar colours
       borderColor="black"
       axisTop={null}
       axisRight={null}
@@ -108,7 +109,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Age Groups", // changed
+      legend: "Age Groups",                         // changed
       legendPosition: "middle",
       legendOffset: 40,
       }}
@@ -116,43 +117,18 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Number of Customers", // changed
+      legend: "Number of Customers",                 // changed
       legendPosition: "middle",
       legendOffset: -45,
       }}
-      enableLabel={true}                             // bar labels
+      enableLabel={true}                            // bar labels
       labelSkipWidth={12}
       labelSkipHeight={0}
       labelTextColor="black"
-      // legends={[                                     // legend
-      //   {
-      //     dataFrom: "indexValue",
-      //     anchor: "right",
-      //     direction: "column",
-      //     justify: false,
-      //     translateX: 120,
-      //     translateY: 0,
-      //     itemsSpacing: 2,
-      //     itemWidth: 100,
-      //     itemHeight: 20,
-      //     itemDirection: "left-to-right",
-      //     itemOpacity: 0.85,
-      //     symbolSize: 20,
-      //     itemTextColor: colors.grey[100],         //"Churn" text
-      //     effects: [
-      //       {
-      //         on: "hover",
-      //         style: {
-      //           itemOpacity: 1,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // ]}
       tooltip={({ id, value, indexValue }) => (
         <div
           style={{
-            color: "#000",         // Hover Font color set to black
+            color: "#000",                          // Hover Font color set to black
             background: "#fff", 
             padding: "12px", 
             borderRadius: "5px", 
@@ -162,9 +138,6 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
         </div>
       )}
       role="application"
-      barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-      }}
     />
   );
 };

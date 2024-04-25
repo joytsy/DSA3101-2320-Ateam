@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
+// code for style of statbox used to format the components on dashboard page
 const StatBox = ({ title, subtitle, icon, increase}) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);

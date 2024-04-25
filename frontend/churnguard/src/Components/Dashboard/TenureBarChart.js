@@ -23,20 +23,14 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
     // Function to group data by tenure ranges
     const groupDataByTenure = (data) => {
       const tenureGroups = {
-        // "0": [],
-        // "0.5": [],
         "1": [],
         "2": [],
         "3": [],
-        // "3.5": [],
         "4": []
       };
     
       data.forEach(customer => {
         const tenure = customer.Tenure;
-        // if (tenure <= 0.5) {
-        //   tenureGroups["0.5"].push(customer);
-        // } else 
         if (tenure <= 1) {
           tenureGroups["1"].push(customer);
         } else if (tenure <= 2) {
@@ -61,7 +55,6 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
     <ResponsiveBar
       data={transformedData}
       theme={{
-        // added
         axis: {
           domain: {
             line: {
@@ -99,7 +92,6 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: 'nivo' }}
-      // colorBy="indexValue"
       borderColor="black"
       axisTop={null}
       axisRight={null}
@@ -107,7 +99,7 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Years of Tenure", // changed
+        legend: "Years of Tenure", 
         legendPosition: "middle",
         legendOffset: 40,
       }}
@@ -115,7 +107,7 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Number of Customers", // changed
+        legend: "Number of Customers", 
         legendPosition: "middle",
         legendOffset: -45,
       }}
@@ -123,34 +115,10 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
       labelSkipWidth={12}
       labelSkipHeight={0}
       labelTextColor="black"
-      // legends={[
-      //   {
-      //     dataFrom: "keys",
-      //     anchor: "right",
-      //     direction: "column",
-      //     justify: false,
-      //     translateX: 120,
-      //     translateY: 0,
-      //     itemsSpacing: 2,
-      //     itemWidth: 100,
-      //     itemHeight: 20,
-      //     itemDirection: "left-to-right",
-      //     itemOpacity: 0.85,
-      //     symbolSize: 20,
-      //     effects: [
-      //       {
-      //         on: "hover",
-      //         style: {
-      //           itemOpacity: 1,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // ]}
       tooltip={({ id, value, indexValue }) => (
         <div
           style={{
-            color: "#000",         // Hover Font color set to black
+            color: "#000",                          // Hover Font color set to black
             background: "#fff", 
             padding: "12px", 
             borderRadius: "5px", 
@@ -160,9 +128,6 @@ const TenureBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' 
         </div>
       )}
       role="application"
-      barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-      }}
     />
   );
 };

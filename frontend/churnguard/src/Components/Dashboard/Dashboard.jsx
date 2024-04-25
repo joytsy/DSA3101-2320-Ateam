@@ -8,8 +8,8 @@ import AgeBarChart from "./AgeBarChart.js";
 import ProductBarChart from "./ProductBarChart.js";
 import TenureBarChart from "./TenureBarChart.js";
 import TotalCustomers from "./TotalCustomer.js";
-import ChurnYTDLineChart from "./ChurnLineChart.js";
-import ReasonsDoughnutChart from "./ReasonsDoughnutChart.js";
+import ChurnLineChart from "./ChurnLineChart.js";
+import PersonaBarChart from "./PersonaBarChart.js";
 import CustomersAtRisk from "./CustomersAtRisk.js";
 import RevenueAtRisk from "./RevenueAtRisk.js";
 import Navbar from "./../Navbar.jsx";
@@ -40,48 +40,41 @@ const Dashboard = () => {
           <Tooltip
           title={
             <span style={{ fontSize: '14px' }}>
-              Number of customers falling under the following personas are expected to churn:<br />
-              "Customer Service Issues",<br />
-              "Technical Difficulties",<br />
-              "Financially Strained" 
+              Number of customers falling under the following personas are expected to churn, but have a high chance of retention:<br />
+              < br/>
+              Customer Service Issues<br />
+              Technical Difficulties<br />
+              Financially Strained 
             </span>
           }
           placement="top"
           >
           <Box
             gridColumn="span 4"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            {/* <Tooltip title="Customers falling under personas - CustomerServiceIssues, TechDifficulties, FinanciallyStrained"> */}
             <StatBox
               title="Customers At Risk (High Chance of Retainment):"
               subtitle={
                 <CustomersAtRisk />
               }
-              icon={ null
-                // <PersonAddIcon
-                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                // />
-              }
+              icon={null}
             />
-            {/* </Tooltip> */}
           </Box>
           </Tooltip>
           <Tooltip
           title={
             <span style={{ fontSize: '14px' ,width: '600px'}}>
-              Total number of customers who have not churned, including customers at risk of churn
+              Total number of customers who have not churned, inclusive of customers at risk of churn
             </span>
           }
           placement="top"
           >
           <Box
             gridColumn="span 4"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
@@ -92,25 +85,20 @@ const Dashboard = () => {
               subtitle={
                 <TotalCustomers />
               }
-              icon={ null
-                // <PersonAddIcon
-                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                // />
-              }
+              icon={null}
             />
           </Box>
           </Tooltip>
           <Tooltip
           title={
             <span style={{ fontSize: '14px' ,width: '600px'}}>
-              Total revenue at risk from balance of customers owning GXS Savings Account
+              Total revenue at risk from the balances of customers owning a GXS Savings Account
             </span>
           }
           placement="top"
           >
           <Box
             gridColumn="span 4"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
             display="flex"
             alignItems="center"
@@ -119,15 +107,8 @@ const Dashboard = () => {
             <StatBox
               title="Revenue At Risk (from GXS savings account):"
               subtitle={
-                <RevenueAtRisk />
-              }
-              // progress="0.75"
-              // increase="+14%"
-              icon={ null
-                // <PersonAddIcon
-                //   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                // />
-              }
+                <RevenueAtRisk />}
+              icon={null}
             />
           </Box>
           </Tooltip>
@@ -144,32 +125,15 @@ const Dashboard = () => {
           <Box
             gridColumn="span 6"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
           >
               <Box>
                 <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
                   Customer Churn per Month
                 </Typography>
-                {/* <Typography
-                  variant="h5"
-                  // fontWeight="bold"
-                  color={colors.greenAccent[500]}
-                  sx={{ padding: "10px 10px 10px 10px" }}
-                >
-                  graph here
-                </Typography> */}
               </Box>
-              {/* <Box>
-                <IconButton>
-                  <DownloadOutlinedIcon
-                    sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                  />
-                </IconButton>
-              </Box> */}
-            
             <Box height="250px" m="-20px 0 0 0">
-              <ChurnYTDLineChart isDashboard={true} />
+              <ChurnLineChart isDashboard={true} />
             </Box>
           </Box>
           </Tooltip>
@@ -178,12 +142,12 @@ const Dashboard = () => {
             <span style={{ fontSize: '14px' ,width: '700px'}}>
               Types of Customer Persona:<br />
               <br />
-              FS:&nbsp;&nbsp;Financially Strained (likely to churn)<br />
+              FS:&nbsp;&nbsp;Financially Strained<br />
               O:&nbsp;&nbsp;&nbsp;&nbsp;Opportunistic<br />
               G:&nbsp;&nbsp;&nbsp;&nbsp;General<br />
-              TD:&nbsp;&nbsp;Technical Difficulties (likely to churn)<br />
+              TD:&nbsp;&nbsp;Technical Difficulties<br />
               L:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loyal<br />
-              CSI:&nbsp;Customer Service Issues (likely to churn)
+              CSI:&nbsp;Customer Service Issues
             </span>
           }
           placement="top"
@@ -191,24 +155,13 @@ const Dashboard = () => {
           <Box
             gridColumn="span 6"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
-            // overflow="auto"
           >
-            {/* <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              colors={colors.grey[100]}
-              p="15px"
-            > */}
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
                 Customer Personas (Hover above chart to understand abbrevations used)
               </Typography>
-            {/* </Box> */}
             { <Box height="260px" mt="-20px" sx={{ padding: "5px" }}>
-              <ReasonsDoughnutChart isDashboard={true} />                         
+              <PersonaBarChart isDashboard={true} />                         
             </Box> }
           </Box>
           </Tooltip>
@@ -217,7 +170,7 @@ const Dashboard = () => {
           <Tooltip
           title={
             <span style={{ fontSize: '14px' }}>
-              Tracking the number of customers churned by product based on entire database data
+              Number of customers churned by product based on entire the customer database
             </span>
           }
           placement="top"
@@ -225,9 +178,7 @@ const Dashboard = () => {
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
-            // p="30px"
           >
             <Typography variant="h5" fontWeight="600" sx={{ padding: "10px 10px 10px 10px" }}>
               Churn by Product
@@ -240,7 +191,7 @@ const Dashboard = () => {
           <Tooltip
           title={
             <span style={{ fontSize: '14px' }}>
-              Tracking the number of customers churned by age based on entire database data
+              Number of customers churned by age based on the entire customer database
             </span>
           }
           placement="top"
@@ -248,7 +199,6 @@ const Dashboard = () => {
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
           >
             <Typography
@@ -266,7 +216,7 @@ const Dashboard = () => {
           <Tooltip
           title={
             <span style={{ fontSize: '14px' }}>
-              Tracking the number of customers churned by tenure based on entire database data
+              Number of customers churned by tenure based on the entire customer database
             </span>
           }
           placement="top"
@@ -274,7 +224,6 @@ const Dashboard = () => {
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             backgroundColor="#2e2148"
           >
             <Typography
