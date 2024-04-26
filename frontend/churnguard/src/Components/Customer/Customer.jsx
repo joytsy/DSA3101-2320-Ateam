@@ -60,7 +60,7 @@ function Customer() {
                 color={colors.grey[100]}
                 fontWeight="bold"
                 sx={{ m: "0 0 10px 10px" }}
-                >Customer Profile & Suggestions: {customer.Name} 
+                >Customer Profile & Suggestions: {customer.Name}, {customer.Persona}
                 </Typography> 
           <div className="customer-detail" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 50, marginLeft: "20px", marginRight: "20px"}}>
           <div>

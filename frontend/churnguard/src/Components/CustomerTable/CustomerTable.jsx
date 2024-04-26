@@ -230,6 +230,7 @@ function CustomerTable() {
                             <th>Customer Name</th>
                             <th>Age</th>
                             <th>Email</th>
+                            <th>Persona</th> 
                             <th>Employment Status</th>
                             <th>Housing Status</th>
                             <th>Member Status</th>
@@ -251,8 +252,7 @@ function CustomerTable() {
                             <th>Customer Satisfaction Survey Score</th>
                             <th>Customer Service Calls</th>
                             <th>Net Promoter Score</th>
-                            <th>Churn</th>  
-                            <th>Persona</th>  
+                            <th>Churn</th>   
                         </tr>
                     </thead>
                     <tbody>
@@ -262,6 +262,7 @@ function CustomerTable() {
                                 <td>{user.Name}</td>
                                 <td>{user.Age}</td>
                                 <td>{user.Email}</td>
+                                <td>{user.Persona}</td>
                                 <td>{employmentStatusLabel[user.EmploymentStatus]}</td>
                                 <td>{housingStatusLabel[user.HousingStatus]}</td>
                                 <td>{activeMemberStatusLabel[user.ActiveMember]}</td>
@@ -284,7 +285,6 @@ function CustomerTable() {
                                 <td>{user.CustomerServiceCalls}</td>
                                 <td>{user.NPS}</td>
                                 <td>{user.Churn}</td>
-                                <td>{user.Persona}</td>
                             </tr>
                         ))}
                     </tbody>
