@@ -12,6 +12,7 @@ from h2ogpte import H2OGPTE
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 import numpy as np
+import bcrypt
 
 app = Flask(__name__, static_folder='frontend')
 
@@ -19,6 +20,7 @@ app = Flask(__name__, static_folder='frontend')
 client = MongoClient("mongodb://mongo:27017/")
 db = client["AteamBank"]
 collection = db["customer_details"]
+users = db["users"]
 
 # LLM setup (H2O.AI)
 load_dotenv()
@@ -49,6 +51,38 @@ post_prompt = ' What would you recommend to the customer relations team to retai
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
+@app.route('/register', methods=['POST'])
+def register():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    
+    if not username or not password:
+        return jsonify({'error': 'Missing username or password'}), 400
+
+    if users.find_one({'username': username}):
+        return jsonify({'error': 'Username already exists'}), 409
+
+    hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    users.insert_one({'username': username, 'password': hashed_pw})
+
+    return jsonify({'message': 'User created successfully'}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    
+    if not username or not password:
+        return jsonify({'error': 'Missing username or password'}), 400
+
+    # Find user in database
+    user = users.find_one({'username': username})
+
+    if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'error': 'Invalid username or password'}), 401
 
 # initialize the database
 @app.route('/upload-all', methods=['POST'])
