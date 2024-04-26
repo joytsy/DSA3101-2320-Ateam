@@ -9,6 +9,9 @@ import joblib
 from dotenv import load_dotenv
 import os
 from h2ogpte import H2OGPTE
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+import numpy as np
 
 app = Flask(__name__, static_folder='frontend')
 
