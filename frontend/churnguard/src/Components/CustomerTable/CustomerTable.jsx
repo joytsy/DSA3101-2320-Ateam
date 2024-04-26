@@ -114,7 +114,6 @@ function CustomerTable() {
         <div class="left">
         <Navbar/ >
         <div className='customer-table-container'>
-            {/* <h1>Customer Details</h1> */}
             <Typography
             variant="h2"
             color={colors.grey[100]}

@@ -1,7 +1,6 @@
 import { Box, Button, IconButton, Typography, useTheme} from "@mui/material";
 import { tokens } from "../../theme";
 import './Dashboard.css';
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "./Header";
 import StatBox from "./StatBox";
 import AgeBarChart from "./AgeBarChart.js";
@@ -15,6 +14,7 @@ import RevenueAtRisk from "./RevenueAtRisk.js";
 import Navbar from "./../Navbar.jsx";
 import Tooltip from "@mui/material/Tooltip";
 
+{/* Code for Dashboard */}
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);

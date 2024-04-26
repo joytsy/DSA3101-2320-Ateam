@@ -4,8 +4,8 @@ import { tokens } from "../../theme";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
-// code for "Churn by Age" bar chart on Dashboard
-const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as prop
+{/* code for "Churn by Age" bar chart on Dashboard */}
+const AgeBarChart =  ({ isDashboard = false}) => {   {/* accept 'isDashboard' as prop*/}
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
         .catch(err => console.log(err));
     }, []);
   
-    // Function to group data by age ranges
+    {/* Function to group data by age ranges */}
     const groupDataByAge = (data) => {
       const ageGroups = {
         "0-18": [],
@@ -99,9 +99,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      // colors={{ scheme: 'set3' }}
       colors="#F7D1D8"
-      // colorBy="indexValue"                        //bar colours
       borderColor="black"
       axisTop={null}
       axisRight={null}
@@ -109,7 +107,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Age Groups",                         // changed
+      legend: "Age Groups",                         
       legendPosition: "middle",
       legendOffset: 40,
       }}
@@ -117,7 +115,7 @@ const AgeBarChart =  ({ isDashboard = false}) => {   // accept 'isDashboard' as 
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "Number of Customers",                 // changed
+      legend: "Number of Customers",                 
       legendPosition: "middle",
       legendOffset: -45,
       }}

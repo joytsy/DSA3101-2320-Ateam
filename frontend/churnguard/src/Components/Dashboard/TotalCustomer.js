@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// code for the Total active customers visual on the dashboard
+{/*code for the Total active customers visual on the dashboard */}
 function TotalCustomers() {
   const [data, setData] = useState([]);
 

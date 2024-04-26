@@ -4,13 +4,14 @@ import { useTheme } from "@mui/material";
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
-// code for "Customer Churn per month" line chart on Dashboard
+{/*} code for "Customer Churn per month" line chart on Dashboard*/}
 const ChurnLineChart  =  ({ isDashboard = false}) => { 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [data, setData] = useState([]);
     const [transformedData, setTransformedData] = useState([]);
 
+    {/* fetch data */}
     useEffect(() => {
         axios.get("/data")
         .then(res => {
