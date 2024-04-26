@@ -90,7 +90,7 @@ test('readClient retrieves client details and returns them', async () => {
   });
 });
 
-
+// Test for persona prediction model 
 describe('/predict endpoint', () => {
   const completeData = {
     Age: 25, EmploymentStatus: 0, HousingStatus: 1, ActiveMember: 1,
