@@ -40,7 +40,7 @@ docker compose up -d
 ```
 http://localhost:3000
 ```
-
+8. Sign up for an account with a unique username and password, then login to Churnguard
 
 
 <!-- 3. Try Endpoints
