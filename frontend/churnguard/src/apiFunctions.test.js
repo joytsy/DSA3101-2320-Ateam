@@ -90,3 +90,63 @@ test('readClient retrieves client details and returns them', async () => {
   });
 });
 
+// Test for persona prediction model 
+describe('/predict endpoint', () => {
+  const completeData = {
+    Age: 25, EmploymentStatus: 0, HousingStatus: 1, ActiveMember: 1,
+    Country: 'Singapore', EstimatedSalary: 50000, Balance: 1500, Gender: 'Male',
+    ProductsNumber: 2, DebitCard: 1, SavingsAccount: 1, FlexiLoan: 1,
+    Tenure: 3, DaysSinceLastTransaction: 14, CustomerEngagementScore: 7,
+    TechSupportTicketCount: 1, NumberOfAppCrashes: 0, NavigationDifficulty: 6,
+    UserFrustration: 0, CustomerSatisfactionSurvey: 8, CustomerServiceCalls: 2, NPS: 9
+  };
+
+  test('predicts successfully and returns prediction', async () => {
+    fetch.mockResponseOnce(JSON.stringify({ prediction: 'TechDifficulties' }));
+    const response = await fetch('/predict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(completeData)
+    });
+    const result = await response.json();
+    expect(result).toEqual({ prediction: 'TechDifficulties' });
+    expect(fetch).toHaveBeenCalledWith('/predict', expect.anything());
+  });
+
+  test('returns error for missing required features', async () => {
+    const incompleteData = { ...completeData };
+    delete incompleteData.Age;  // Assume 'Age' is a required field and is missing
+    fetch.mockResponseOnce(JSON.stringify({ error: 'Missing one or more of the required features' }), { status: 400 });
+    const response = await fetch('/predict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(incompleteData)
+    });
+    const result = await response.json();
+    expect(result).toEqual({ error: 'Missing one or more of the required features' });
+    expect(response.status).toBe(400);
+  });
+});
+
+
+describe('/batch-predict-update endpoint', () => {
+  test('batch prediction and updates successfully', async () => {
+    fetch.mockResponseOnce(JSON.stringify({ message: 'Batch prediction and update completed successfully' }));
+    const response = await fetch('/batch-predict-update', {
+      method: 'GET'
+    });
+    const result = await response.json();
+    expect(result).toEqual({ message: 'Batch prediction and update completed successfully' });
+    expect(fetch).toHaveBeenCalledWith('/batch-predict-update', expect.anything());
+  });
+
+  test('handles error during batch update', async () => {
+    fetch.mockResponseOnce(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
+    const response = await fetch('/batch-predict-update', {
+      method: 'GET'
+    });
+    const result = await response.json();
+    expect(result).toEqual({ error: 'Internal Server Error' });
+    expect(response.status).toBe(500);
+  });
+});

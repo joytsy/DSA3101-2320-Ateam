@@ -247,6 +247,90 @@ def suggest_product(CustomerID):
     else:
         return jsonify({'message': 'Client not found'}), 404
 
+# Load the model and preprocessor
+model = joblib.load('Gradient Boosting_best_model.pkl')
+preprocessor = joblib.load('preprocessor.pkl')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.get_json(force=True)
+        required_features = [
+            'Age', 'EmploymentStatus', 'HousingStatus', 'ActiveMember', 'Country',
+            'EstimatedSalary', 'Balance', 'Gender', 'ProductsNumber', 'DebitCard',
+            'SavingsAccount', 'FlexiLoan', 'Tenure', 'DaysSinceLastTransaction',
+            'CustomerEngagementScore', 'TechSupportTicketCount', 'NumberOfAppCrashes',
+            'NavigationDifficulty', 'UserFrustration', 'CustomerSatisfactionSurvey',
+            'CustomerServiceCalls', 'NPS'
+        ]
+
+        # Check for the existence of all required features
+        if not all(feature in data for feature in required_features):
+            return jsonify({'error': 'Missing one or more of the required features'}), 400
+
+        # Create DataFrame
+        df = pd.DataFrame([data])
+        
+        # Check that all columns are present after creating the DataFrame
+        if not all(column in df.columns for column in required_features):
+            return jsonify({'error': 'Missing one or more of the required features in DataFrame'}), 400
+
+        # Apply preprocessing
+        preprocessed_features = preprocessor.transform(df)
+        
+        # Predict using the preprocessed features
+        prediction = model.predict(preprocessed_features)[0]
+        return jsonify({'prediction': prediction})
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/batch-predict-update', methods=['GET'])
+def batch_predict_update():
+    try:
+        # Setup MongoDB client and select collection
+        client = MongoClient('mongodb_connection_string')
+        db = client['database_name']
+        collection = db['collection_name']
+
+        # Fetch data from MongoDB
+        records = collection.find({})
+        data_list = list(records)
+        
+        for record in data_list:
+            record['_id'] = str(record['_id'])  # Convert ObjectId to string for JSON compatibility
+            
+        required_features = [
+            'Age', 'EmploymentStatus', 'HousingStatus', 'ActiveMember', 'Country',
+            'EstimatedSalary', 'Balance', 'Gender', 'ProductsNumber', 'DebitCard',
+            'SavingsAccount', 'FlexiLoan', 'Tenure', 'DaysSinceLastTransaction',
+            'CustomerEngagementScore', 'TechSupportTicketCount', 'NumberOfAppCrashes',
+            'NavigationDifficulty', 'UserFrustration', 'CustomerSatisfactionSurvey',
+            'CustomerServiceCalls', 'NPS'
+        ]
+        # Convert list of dictionaries to DataFrame
+        df = pd.DataFrame(data_list)
+        
+        # Check that all columns are present
+        if not all(column in df.columns for column in required_features):
+            return jsonify({'error': 'Missing one or more of the required features in data'}), 400
+
+        # Apply preprocessing
+        preprocessed_features = preprocessor.transform(df[required_features])
+        
+        # Predict using the preprocessed features
+        predictions = model.predict(preprocessed_features)
+        
+        # Update MongoDB with the new 'Persona' predictions
+        for record, prediction in zip(data_list, predictions):
+            collection.update_one({'_id': ObjectId(record['_id'])}, {'$set': {'Persona': prediction}})
+
+        return jsonify({'message': 'Batch prediction and update completed successfully'}), 200
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 # for inidividual testing
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)
