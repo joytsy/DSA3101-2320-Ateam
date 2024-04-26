@@ -1,6 +1,7 @@
 import { Typography, Box, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
+{/* code for Header function on dashboard */}
 const Header = ({ title, subtitle }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

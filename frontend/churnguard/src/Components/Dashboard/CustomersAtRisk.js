@@ -1,16 +1,18 @@
-// calculations: fall into one of the personas churn is predicted for, but churn col is still not churn. 
+// Calculation logic: customer falls into one of the personas that is expected to churn, but has not churned yet. 
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Code for "Customers At Risk" visual in Dashboard page
 function CustomersAtRisk() {
     const [data, setData] = useState([]);
 
+    // fetch data
     useEffect(() => {
       axios.get("/data")
         .then(res => res.data) 
         .then(data => setData(data.filter(customer => 
-          customer.Churn === 0 &&                              // not churned yet
+          customer.Churn === 0 &&                              // filter condition: have not churned
           (customer.Persona === "CustomerServiceIssues" || 
           customer.Persona === "FinanciallyStrained" || 
           customer.Persona === "TechDifficulties")

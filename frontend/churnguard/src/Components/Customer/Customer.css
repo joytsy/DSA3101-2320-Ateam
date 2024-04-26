@@ -1,11 +1,10 @@
 .response-area {
-    width: 100%; /* Ensures it fills the column */
+    width: 100%; 
     min-height: 150px; /* Adjust based on content needs */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical; /* Allows vertical resizing only */
-    /* background-color: #2e2148; */
   }
 
 .customer-detail-container {
@@ -13,7 +12,6 @@
     width: 100%;
     overflow-x: auto; /* Enable horizontal scrolling if the table exceeds the screen width */
     padding: 1rem;
-    /* background-color: #141b2d; */
     background-color: #0c0120;
     font-size: 15px;
   }
@@ -21,7 +19,6 @@
 .customer_detail_page {
     margin: 0;
     padding: 0;
-    /* background: #141b2d; */
     background: #0c0120;
     color: #e0e0e0;
     font-family: "Source Sans Pro", sans-serif;
@@ -34,12 +31,7 @@
   }
 
 .left {
-    /* position: absolute;
-    left: 100px;
-    width: 1000px;
-    padding: 10px; */
     background-color: #0c0120;
-    /* display: flex; */
     position: relative;
     justify-content: center; 
     align-items: center;

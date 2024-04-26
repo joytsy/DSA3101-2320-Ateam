@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// code for "Revenue At Risk" visual in the dashboard
 function RevenueAtRisk() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios.get("/data")
-      .then(res => res.data) // Assuming the response directly contains the data array
+      .then(res => res.data) 
       .then(data => setData(data))
       .catch(err => console.log(err));
   }, []);
@@ -23,8 +24,7 @@ function RevenueAtRisk() {
       return acc + customer.Balance;
     }, 0);
 
-    // const formattedRevenueAtRisk = RevenueAtRisk.toFixed(2);
-    // add commas between large numbers, max 2 decimal places
+    // add commas between large numbers, set maxmimum 2 decimal places shown
     const formattedRevenueAtRisk = RevenueAtRisk.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2

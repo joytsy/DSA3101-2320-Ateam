@@ -3,7 +3,6 @@
 .dashboard_body {
     margin: 0;
     padding: 0;
-    /* background: #141b2d; */
     background: #0c0120;
     color: #e0e0e0;
     font-family: "Source Sans Pro", sans-serif;
@@ -20,10 +19,6 @@
     height: 100vh;
     width: 100vw;
     background: #0c0120;
-    /* background: #141b2d; */
-    /* padding-left: 300px;
-    padding-right: 300px;
-    padding-bottom: 10px; */
     overflow-x: hidden;
 }
 
