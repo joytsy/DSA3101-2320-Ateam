@@ -13,10 +13,20 @@ services:
     depends_on:
       - mongo
   app:
-    build: ./frontend/churnguard
+    build: 
+      context: ./frontend/churnguard
+      dockerfile: Dockerfile-app
     ports:
       - "3000:3000"
+    depends_on:
+      - auth
 
+  auth:
+    build: 
+      context: ./frontend/churnguard
+      dockerfile: Dockerfile-login
+    ports: 
+     - "3001:3001"
   mongo:
     image: mongo:latest
     ports:

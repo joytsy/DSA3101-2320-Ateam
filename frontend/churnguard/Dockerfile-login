@@ -1,0 +1,20 @@
+# pull official base image
+FROM node:19.8.1-alpine3.17
+
+WORKDIR /churnguard
+
+# add `/churnguard/node_modules/.bin` to $PATH
+ENV PATH /churnguard/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package*.json ./
+
+RUN npm install 
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3001
+
+# start app
+CMD ["node", "authentication.js"]
